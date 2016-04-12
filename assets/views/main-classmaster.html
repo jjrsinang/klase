@@ -1,0 +1,33 @@
+
+<div class="profile-container margin-padding" ng-controller="ClassmasterCtrl as classmaster">
+    
+    <table class="table table-condensed table-striped table-hover">
+    
+    <thead>
+      <tr>
+        <th>Course #</th>
+        <th>Course Code</th>
+        <th>Units</th>
+        <th>Section</th>
+        <th>Schedule</th>
+        <th>Slots</th>
+        <th>Faculty</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        
+      <tr ng-repeat="section in allSections">
+        <td>{{ section.courseNumber }}</td>
+        <td>{{ section.courseTitle }}</td>
+        <td>{{ section.units }}</td>
+        <td>{{ section.sectionName }}</td>
+        <td>{{ section.sectionSchedule}}</td>
+        <td>30 / 30</td>
+        <td>-</td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,38 @@
+
+<div class="feed-container" ng-controller="ClassCtrl as class">
+    
+    <div class="post img-rounded">
+        <h3>{{ section.courseNumber + " " + section.sectionName}}</h3>
+        <blockquote>
+            <h4>{{ section.teacher.rank + " " + section.teacher.fName + " " + section.teacher.lName }}</h4>
+            {{ section.semester }}
+        </blockquote>
+        <ul class="nav nav-tabs">
+            <li ng-class="{ active:isSet(1) }">
+                <a href ng-click="setTab(1)">Posts</a>
+            </li>
+            <li ng-class="{ active:isSet(2) }">
+                <a href ng-click="setTab(2); getActivities()">Activities</a>
+            </li>
+            <li ng-class="{ active:isSet(3) }">
+                <a href ng-click="setTab(3)">Grades</a>
+            </li>
+            <li ng-class="{ active:isSet(4) }">
+                <a href ng-click="setTab(4)">Members</a>
+            </li>
+        </ul>
+    </div>
+    
+    <klase-class-posts ng-show="isSet(1)"></klase-class-posts>
+    
+    <div ng-controller="ClassActivitiesCtrl as activitiesCtrl">
+        <klase-class-activities ng-show="isSet(2)"></klase-class-activities>
+    
+        <klase-class-activity ng-show="isSet(5)"></klase-class-activity>
+    </div>
+    
+    <klase-class-grades ng-show="isSet(3)"></klase-class-grades>
+    
+    <klase-class-members ng-show="isSet(4)"></klase-class-members>
+
+</div>

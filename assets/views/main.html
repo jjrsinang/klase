@@ -1,0 +1,18 @@
+
+<klase-header ng-show="loggedIn"></klase-header>
+
+<klase-sidepanel ng-show="loggedIn"></klase-sidepanel>
+ 
+<klase-feed ng-show="loggedIn && isSet(1)"></klase-feed> 
+ 
+<klase-profile ng-show="loggedIn && (isSet(2) || (showProfile && !(isSet(1) || isSet(2) || isSet(3) || isSet(4)) ))"></klase-profile>
+
+<klase-messages ng-show="loggedIn && isSet(3)"></klase-messages>
+
+<klase-class-master ng-show="loggedIn && isSet(4) && role == 'Teacher' "></klase-class-master>
+
+<klase-class ng-show="loggedIn && showClass && !(isSet(1) || isSet(2) || isSet(3) || isSet(4))"></klase-class>
+
+<klase-calendar ng-show="loggedIn && isSet(6)"></klase-calendar>
+
+<!--<klase-login ng-hide="loggedIn"></klase-login>-->

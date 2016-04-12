@@ -1,0 +1,34 @@
+ <ul style="width: 220px; float: left"> </ul>
+
+ <div id="sidebar-wrapper" ng-controller="SidepanelCtrl as sidepanel">
+   
+   <!-- classes -->
+   <div class="classes">
+      <ul class="sidebar-nav">
+        
+        <li>
+            <span class="glyphicon glyphicon-blackboard"></span> Classes
+        </li>
+        
+        <li ng-repeat="section in sections" ng-class="{ active:isSet($index + 5) }">
+            <a href ng-click="setTab($index + 5); displaySelectedSection($index)">{{ section.courseNumber + " " + section.sectionName }}</a>
+        </li>
+    </ul>
+   </div>
+    
+   <!-- events -->
+   <div class="events">
+      <ul class="sidebar-nav">
+         <li>
+            <span class="glyphicon glyphicon-calendar"></span> Upcoming Events
+         </li>
+         
+         <li ng-repeat="event in events" ng-class="{ active:isSet($index + sections.length + 5) }">
+            <a href ng-click="setTab( {{ $index + sections.length + 5 }} )">
+               {{ event.title + " " + "(N days left)" }}
+            </a>
+         </li>
+      </ul>
+   </div>
+   
+</div>

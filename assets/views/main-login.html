@@ -1,0 +1,25 @@
+
+
+<div class="jumbotron">
+  <h2>Login to Klase</h2>
+  
+  <form role="form" ng-submit="loginPressed()" novalidate>
+    <div class="row form-group">
+      <input type="text" ng-model="login.username" placeholder="Username" class="form-control" required>
+      <input type="password" ng-model="login.password" placeholder="Password" class="form-control" required>
+    </div>
+    
+    <p class="lead">
+      Please log in using your <a href="http://systemone.uplb.edu.ph/systemone/" target="_">SystemOne</a> credentials.
+    </p>
+    
+      <p>
+        <button type="submit" class="btn btn-primary">
+          <span ng-show="!login.loading">Log in</span>
+          <span ng-show="login.loading" class="fa fa-spinner"></span>
+          <span ng-show="login.loading">Loggin in...</span>
+        </button>
+      </p>
+  </form>
+  
+</div>

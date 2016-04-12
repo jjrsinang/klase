@@ -1,0 +1,12 @@
+
+
+<div class="profile-container">
+    
+    <div ng-show="loading" class="post img-rounded">
+        <span class="fa fa-spinner"></span> Loading...
+    </div>
+    
+    <div class="post img-rounded" ng-repeat="activity in activities">
+        <a href ng-click="test($index); setTab(5);"><span><b>{{ activity.title }}</b></span> {{ activity.schedule | date: 'EEE MMM d, yyyy h:mm a' }}</a>
+    </div>
+</div>

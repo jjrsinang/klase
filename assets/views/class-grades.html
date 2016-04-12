@@ -1,0 +1,27 @@
+
+<div ng-controller="GradesCtrl as grades" class="profile-container margin-padding">
+    
+    <table class="table table-condensed table-striped table-hover">
+    
+    <thead>
+      <tr>
+        <th>Student #</th>
+        <th>Name</th>
+        <th ng-repeat="activity in activities">{{ activity.name + " (" + activity.mark + ")" }}</th>
+        <th>Total</th>
+        <th>Average</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr ng-repeat="student in students">
+        <td>{{ student.studentNumber }}</td>
+        <td>{{ student.name }}</td>
+        <td ng-repeat="score in student.scores">{{ score.score }}</td>
+        <td>40</td>
+        <td>100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

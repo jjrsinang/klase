@@ -1,0 +1,12 @@
+
+
+<div ng-controller="MembersCtrl as membersCtrl" class="profile-container">
+    
+    <a ng-repeat="member in members" href>
+        <div class="member img-rounded">
+            <img class="small-avatar" ng-src="images/yeoman.png" />
+            <span><b>{{ member.name }}</b></span>
+        </div>
+    </a>
+    
+</div>

@@ -1,0 +1,19 @@
+
+
+<div class="profile-container">
+    
+    <div ng-show="loading" class="post img-rounded">
+        <span class="fa fa-spinner"></span> Loading...
+    </div>
+    
+    <div class="post img-rounded">
+        <span><h4>{{ activitySelected.title }}</h4></span>
+        <br />
+        <span><b>{{ activitySelected.message }}</b></span>
+        <br />
+        <span>{{ activitySelected.schedule | date: 'MMM d, yyyy' }}</span>
+        
+        
+    </div>
+    
+</div>
