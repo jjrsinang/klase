@@ -50,6 +50,11 @@ module.exports = {
     
     poster: {
       model: 'User'
+    },
+
+    comments: {
+      collection: 'postresponse',
+      via: 'post'
     }
   }
 };

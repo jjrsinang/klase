@@ -22,6 +22,24 @@ module.exports = {
             return res.ok(posts);
         });
     },
+
+    /**********************************************************/
+    getPost:  function (req, res) {
+        Post
+        .findOne({
+            id: req.param('id')
+        })
+        .populateAll()
+        .exec(function foundPost(err, post) {
+            if (err) return res.negotiate(err);
+            if (!post) return res.notFound();
+            
+            sails.log.info('getPost: ');
+            //sails.log.debug(posts);
+            
+            return res.ok(post);
+        });
+    },
     
     /**********************************************************/
     getPostsForUser: function (req, res) {
@@ -86,14 +104,8 @@ module.exports = {
     },
     
     /**********************************************************/
-    postToSection: function(req, res) { // THIS IS THE WORKING ONE
-        sails.log.info('postToSection: ');
-        //sails.log.debug(req.body);
-        //sails.log.debug(req.body.message);
-        //sails.log.debug(req.body.sectionId );
-        //sails.log.debug(req.body.posterId);
-        //sails.log.debug(req.query);
-        //sails.log.debug(req.params);
+    postWithUpload: function(req, res) { // THIS IS THE WORKING ONE
+        sails.log.info('postWithUpload: ');
         
         // stop if kulang ng data
         if (!req.body.message ||
@@ -104,11 +116,15 @@ module.exports = {
         }
         
 		var uploadFile = req.file('file');
-		//sails.log.info(uploadFile);
+        var now = new Date();
+        var originalName = '';
+		sails.log.info(uploadFile);
          
         uploadFile.upload({
             dirname: '../public/images',//	Files will be uploaded to ./assets/images
             saveAs: function (__newFileStream, cb) {
+                originalName = __newFileStream.filename;
+                __newFileStream.filename = now.toString() + ' - ' + __newFileStream.filename;
                 cb(null, __newFileStream.filename);
             }
         },function onUploadComplete (err, files) {
@@ -117,19 +133,20 @@ module.exports = {
             sails.log.debug(files);
             // copy file for permanent storage
             var fs = require('fs');
-            fs.createReadStream(files[0].fd).pipe(fs.createWriteStream('/Users/MacBook/Documents/Projects/test/testProject/assets/images/' + files[0].filename));
+            
+            fs.createReadStream(files[0].fd).pipe(fs.createWriteStream('/Users/jjsinang/Documents/Projects/klaseApp/assets/images/' + files[0].filename));
 			
 	    	sails.log.info(files);
             // create post if upload is successful
             Post.create({
                message: req.body.message,
-               file: files[0].filename,
+               file: originalName,
                filename: files[0].filename,
                sectionId: req.body.sectionId,
                posterId: req.body.posterId,
                section: req.body.sectionId,
                poster: req.body.posterId,
-               postDate: new Date()
+               postDate: now
             }, function postCreated(err, newPost) {
                 if (err) {
                     return res.negotiate(err);
@@ -141,6 +158,13 @@ module.exports = {
     
     /**********************************************************/
     post: function (req, res) {
+        if (!req.param('message') ||
+            !req.param('sectionId') ||
+            !req.param('posterId')) {
+            sails.log.error('post: insufficient params');
+            return res.notFound();
+        }
+
         Post.create({
             message: req.param('message'),
             sectionId: req.param('sectionId'),
@@ -150,7 +174,7 @@ module.exports = {
             postDate: new Date()
          }, function postCreated(err, newPost) {
              if (err) {
-                 return res.negotiate(err);
+                return res.negotiate(err);
              }
              return res.ok(newPost);
          });
@@ -158,18 +182,43 @@ module.exports = {
     
     /**********************************************************/
     deletePost: function (req, res) {
-        Post.create({
-            message: req.param('message'),
-            sectionId: req.param('sectionId'),
-            posterId: req.param('posterId'),
-            section: req.param('sectionId'),
-            poster: req.param('posterId'),
-            postDate: new Date()
-         }, function postCreated(err, newPost) {
+        sails.log.info('deletePost: ' +req.param('id'));
+        Post.destroy({
+            id: req.param('id')
+         }, function postDeleted(err, deleted) {
              if (err) {
                  return res.negotiate(err);
              }
-             return res.ok(newPost);
+             return res.ok(deleted);
          });
+    },
+
+    createComment: function (req, res) {
+        sails.log.info('createComment: ');
+
+        User
+        .findOne({
+            id: req.param('commenterId')
+        })
+        .exec(function findUser(err, user){
+            if (err) return res.negotiate(err);
+            if (!user) return res.notFound();
+
+            PostResponse
+            .create({
+                message: req.param('comment'),
+                responseDate: new Date(),
+                commenter: user.fName + ' ' + user.lName,
+                commenterId: req.param('commenterId'),
+                postId: req.param('postId'),
+                post: req.param('postId')
+            })
+            .exec(function createPostResponse(error, newResponse){
+                if (error) return res.negotiate(error);
+                if (!newResponse) return res.notFound();
+
+                return res.ok(newResponse);
+            });
+        });
     }
 };

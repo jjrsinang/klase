@@ -18,38 +18,46 @@ module.exports = {
       if (err) return res.negotiate(err);
       if (!user) return res.notFound();
 
-      // Compare password attempt from the form params to the encrypted password
-      // from the database (`user.password`)
-      require('machinepack-passwords').checkPassword({
-        passwordAttempt: req.param('password'),
-        encryptedPassword: user.encryptedPassword
-      }).exec({
+      // Store user id in the user session
+      req.session.authenticated = true;
+      req.session.me = user.id;
 
-        error: function (err){
-          return res.negotiate(err);
-        },
+      // All done- let the client know that everything worked.
+      return res.ok(user);
 
-        // If the password from the form params doesn't checkout w/ the encrypted
-        // password from the database...
-        incorrect: function (){
-          return res.notFound();
-        },
+      // // Compare password attempt from the form params to the encrypted password
+      // // from the database (`user.password`)
+      // require('machinepack-passwords').checkPassword({
+      //   passwordAttempt: req.param('password'),
+      //   encryptedPassword: user.encryptedPassword
+      // }).exec({
 
-        success: function (){
+      //   error: function (err){
+      //     return res.negotiate(err);
+      //   },
 
-          // Store user id in the user session
-          req.session.authenticated = true;
-          req.session.me = user.id;
+      //   // If the password from the form params doesn't checkout w/ the encrypted
+      //   // password from the database...
+      //   incorrect: function (){
+      //     return res.notFound();
+      //   },
 
-          // All done- let the client know that everything worked.
-          return res.ok(user);
-        }
-      });
+      //   success: function (){
+
+      //     // Store user id in the user session
+      //     req.session.authenticated = true;
+      //     req.session.me = user.id;
+
+      //     // All done- let the client know that everything worked.
+      //     return res.ok(user);
+      //   }
+      // });
     };
     
     // Try to look up user using the provided username, password and role
     User.findOne({
-      username: req.param('username')
+      username: req.param('username'),
+      encryptedPassword: req.param('password')
     }, callback);
   },
 
@@ -141,6 +149,49 @@ module.exports = {
       // Either send a 200 OK or redirect to the home page
       return res.backToHomePage();
 
+    });
+  },
+
+  /***************************************************************************
+   * get all teachers
+   ***************************************************************************/
+  getTeachers: function (req, res) {
+    User.find({
+      role: 'Teacher'
+    }, function (error, teachers){
+      if (error) return res.negotiate(error);
+      if (!teachers) return res.notFound();
+      return res.ok(teachers);
+    });
+  },
+
+  /***************************************************************************
+   * get users given section id
+   ***************************************************************************/
+  getUsersBySection: function (req, res) {
+    sails.log.info('getUsersBySection: ');
+    UserSection.find({
+      role: 'Student',
+      sectionId: req.param('sectionId')
+    }, function foundUserSections(error, studentSections){
+      if (error) return res.negotiate(error);
+      if (!studentSections) return res.notFound();
+
+      var ids = [];
+      for (var i = 0; i < studentSections.length; i++) {
+        ids.push(studentSections[i].userId);
+      };
+
+      User
+      .find({
+        id : ids,
+        role: 'Student'
+      },function foundUsers(err, users){
+        if (err) return res.negotiate(error);
+        if (!users) return res.notFound();
+
+        return res.ok(users);
+      });
     });
   }
 };

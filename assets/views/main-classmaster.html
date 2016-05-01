@@ -1,12 +1,14 @@
 
 <div class="profile-container margin-padding" ng-controller="ClassmasterCtrl as classmaster">
     
+
+    <button type="submit" class="btn btn-primary" ng-click="addSection()">Add section...</button>
     <table class="table table-condensed table-striped table-hover">
     
     <thead>
       <tr>
-        <th>Course #</th>
         <th>Course Code</th>
+        <th>Course Title</th>
         <th>Units</th>
         <th>Section</th>
         <th>Schedule</th>
@@ -21,10 +23,23 @@
         <td>{{ section.courseNumber }}</td>
         <td>{{ section.courseTitle }}</td>
         <td>{{ section.units }}</td>
-        <td>{{ section.sectionName }}</td>
-        <td>{{ section.sectionSchedule}}</td>
-        <td>30 / 30</td>
-        <td>-</td>
+        <td>{{ section.sectionName + ' ' + section.sectionType}}</td>
+        <td>{{ section.sectionSchedule }}</td>
+        <td>{{ section.availableSlots + " / " + section.slotsLimit }}</td>
+        <td>
+          {{ section.teacher.fName + " " + section.teacher.lName }}
+          <select class="form-control" ng-model="selectedTeacher[section.id]" ng-options="t.fName+' '+t.lName for t in availableTeachers track by t.id" id="{{'newTeacherId'+section.id}}" >
+              <option value="">-- select teacher --</option>
+          </select>
+        </td>
+        <td>
+          <button type="submit" class="btn btn-primary btn-sm" ng-click="addStudent(section)">Add student...</button>
+          <button type="submit" class="btn btn-warning btn-sm" ng-click="removeStudent(section)">Remove student...</button>
+          <button type="submit" class="btn btn-success btn-sm" ng-click="saveTeacher(section)">
+            <span ng-show="!saveTeacherLoading">Save teacher</span>
+            <span ng-show="saveTeacherLoading" class="fa fa-spinner"></span>
+          </button>
+        </td>
       </tr>
       
     </tbody>

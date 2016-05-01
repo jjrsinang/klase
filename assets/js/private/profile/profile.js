@@ -13,7 +13,7 @@
       
       $scope.setdefault = function () {
         $scope.fullname = $cookies.get('fullname') || '-';
-        $scope.course = $cookies.get('course') != 'null' ? $cookies.get('rank') : '-';
+        $scope.course = $cookies.get('course') ? $cookies.get('rank') : '-';
         $scope.college = $cookies.get('college') || '-';
         $scope.birthday = $cookies.get('birthday') || '-';
       };

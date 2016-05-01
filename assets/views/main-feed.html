@@ -14,11 +14,13 @@
         <!-- post note -->
         <form ng-show="isSet(1) && loggedInUserRole != 'Student'" name="form">
             <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here"></textarea>
-            <select class="form-control" ng-model="selectedSection" ng-options="s.sectionName for s in accessibleSections track by s.id" name="sectionId" >
+            <select class="form-control" ng-model="selectedSection" ng-options="s.courseNumber+' '+s.sectionName for s in accessibleSections track by s.id" name="sectionId" >
+                <option value="">-- select section --</option>
             </select>
             <div class="btn btn-default btn-file" ngf-select ng-model="file" name="file"
                 ngf-max-size="'20MB'" ngf-min-height="100" 
-                ngf-resize="{width: 100, height: 100}">Select</div>
+                ngf-resize="{width: 100, height: 100}">Upload...</div>
+                {{ file.name }}
             <button type="submit" class="btn btn-primary" ng-click="submit()">submit</button>
         </form>
         
@@ -56,7 +58,16 @@
             <span class="glyphicon glyphicon-file"></span>{{ post.file }}
         </a>
         <hr>
-        <span ><a href><span class="glyphicon glyphicon-comment"></span> Respond</a></span>
+        <div ng-repeat="comment in post.comments | orderBy: 'postDate' : true" class="post img-rounded">
+            <b>{{ comment.commenter }}</b>{{ comment.postDate | date: 'EEE MMM d, yyyy h:mm a' }}
+            <br>
+            <p>{{ comment.message }}</p>
+            <br>
+        </div>
+        <a href ng-click="showCommentField(post.id)" ng-hide="post.showCommentField"><span class="glyphicon glyphicon-comment"></span> Comment...</a>
+        <form ng-submit="postComment(post.id)">
+            <input type="text" class="form-control" ng-model="post.commentTextField" placeholder="Write a comment..." ng-show="post.showCommentField">
+        </form>
     </div>
     
 </div>

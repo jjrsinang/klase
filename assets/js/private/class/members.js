@@ -10,35 +10,31 @@
  */
 angular.module('klaseApp')
   .controller('MembersCtrl', ['$scope', '$http', 'toastr',function ($scope, $http, toastr) {
-    $scope.members = [
-      {
-        name: 'Alysa Dela Cruz'
-      },
-      {
-        name: 'Belinda Chavez'
-      },
-      {
-        name: 'Camille Landryto'
-      },
-      {
-        name: 'Crenezza Louisse Valerio'
-      },
-      {
-        name: 'Stephanie Pura'
-      },
-      {
-        name: 'Ilonah Kris de Sena'
-      },
-      {
-        name: 'Alodia Gosiengfiao'
-      },
-      {
-        name: 'Jeanne Dumale'
-      },
-      {
-        name: 'Cyen Lazam'
-      }
-    ];
+    $scope.members = [];
+
+  /* **************************************************************
+   * Fetch members
+   * **************************************************************/
+  var getMembers = function (sectionId) {
+    console.log('PUT /membersbysection');
+    $http.put('/membersbysection', {
+      sectionId: sectionId
+    })
+    .then(function onSuccess(sailsResponse){
+      $scope.members = sailsResponse.data;
+      //toastr.error('Success', 'Success ' + sailsResponse.status);
+    })
+    .catch(function onError(sailsResponse){
+      toastr.error('Error :(.', 'Error ' + sailsResponse.status);
+    });
+  };
+
+  /* **************************************************************
+   * show class event
+   * **************************************************************/
+  $scope.$on('getClassMembers',function(e, section){
+    getMembers(section.id);
+  });
     
   }]);
 })();

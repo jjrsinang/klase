@@ -7,19 +7,17 @@
       <tr>
         <th>Student #</th>
         <th>Name</th>
-        <th ng-repeat="activity in activities">{{ activity.name + " (" + activity.mark + ")" }}</th>
-        <th>Total</th>
-        <th>Average</th>
+        <th ng-repeat="activity in activities">{{ activity.title + " (" + activity.mark + ")" }}</th>
+        <th>Total ({{ total }})</th>
       </tr>
     </thead>
     
     <tbody>
       <tr ng-repeat="student in students">
-        <td>{{ student.studentNumber }}</td>
-        <td>{{ student.name }}</td>
-        <td ng-repeat="score in student.scores">{{ score.score }}</td>
-        <td>40</td>
-        <td>100%</td>
+        <td>{{ student.studentNo }}</td>
+        <td>{{ student.fName + ' ' + student.lName }}</td>
+        <td ng-repeat="assignment in student.assignments">{{ assignment.score }}</td>
+        <td>{{ student.total }}</td>
       </tr>
     </tbody>
   </table>

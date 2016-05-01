@@ -27,11 +27,8 @@ angular.module('klaseApp')
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
-		
-		if (sailsResponse.status == 500) {
-			toastr.error('Error :(.', 'Error');
-			return;
-		}
+		toastr.error('Error '+sailsResponse.status, 'Error');
+		return;
 	  });
     };
 	
@@ -48,11 +45,8 @@ angular.module('klaseApp')
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
-		
-		if (sailsResponse.status == 500) {
-			toastr.error('Error :(.', 'Error');
-			return;
-		}
+		toastr.error('Error '+sailsResponse.status, 'Error');
+		return;
 	  });
 	};
 	

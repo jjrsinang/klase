@@ -23,7 +23,8 @@ angular
     'ui.calendar',
     'toastr',
     'compareTo',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngDialog'
   ])
   
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){

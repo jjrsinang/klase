@@ -20,6 +20,10 @@ module.exports = {
       type: 'integer',
       columnName: 'user_id'
     },
+
+    role: {
+      type: 'string',
+    },
     
     sectionId: {
       type: 'integer',

@@ -16,7 +16,8 @@ angular.module('klaseApp')
 	$scope.section = null;
 	$scope.loggedInUserId = $cookies.get('id');
 	$scope.loggedInUserRole = $cookies.get('role');
-	
+	$scope.file = null;
+
     
     /* **************************************************************
 	 * Fetch posts
@@ -28,16 +29,71 @@ angular.module('klaseApp')
 	  })
 	  .then(function onSuccess(sailsResponse){
 		  $scope.posts = sailsResponse.data;
-		  console.log($scope.posts);
+		  for (var i = 0; i < $scope.posts.length; i++) {
+		  	$scope.posts[i].showCommentField = false;
+		  	$scope.posts[i].commentTextField = null;
+		  };
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
-		
-		if (sailsResponse.status != 200) {
+		toastr.error('Error PUT /sectionposts.', 'Error ' + sailsResponse.status);
+		return;
+	  });
+    };
+
+    /* **************************************************************
+	 * comments
+	 * **************************************************************/
+    $scope.showCommentField = function(postId) {
+    	for (var i = 0; i < $scope.posts.length; i++) {
+    		if ($scope.posts[i].id == postId) {
+    			$scope.posts[i].showCommentField = true;
+    		}
+		}
+    };
+
+    var fetchFreshPost = function (postId) {
+    	console.log('GET /post/'+postId);
+    	$http.get('/post/'+postId)
+		.then(function onSuccess(sailsResponse){
+			for (var i = 0; i < $scope.posts.length; i++) {
+	    		if ($scope.posts[i].id == sailsResponse.data.id) {
+	    			$scope.posts[i] = sailsResponse.data;
+	    			$scope.posts[i].showCommentField = false;
+		  			$scope.posts[i].commentTextField = null;
+	    		}
+			}
+			return;
+		})
+		.catch(function onError(sailsResponse){
+			toastr.error('Error GET /post/'+postId, 'Error ' + sailsResponse.status);
+			return;
+		});
+    };
+
+    var postComment = function (postId, comment) {
+    	console.log('POST /postcomment');
+    	$http.post('/postcomment', {
+			postId: postId,
+			commenterId: $scope.loggedInUserId,
+			comment: comment
+		})
+		.then(function onSuccess(sailsResponse){
+			fetchFreshPost(postId);
+			return;
+		})
+		.catch(function onError(sailsResponse){
 			toastr.error('Error :(.', 'Error ' + sailsResponse.status);
 			return;
+		});
+    };
+
+    $scope.postComment = function (postId) {
+    	for (var i = 0; i < $scope.posts.length; i++) {
+    		if ($scope.posts[i].id == postId) {
+    			postComment(postId, $scope.posts[i].commentTextField);
+    		}
 		}
-	  });
     };
 	
 	/* **************************************************************
@@ -47,7 +103,7 @@ angular.module('klaseApp')
       getPosts(section.id);
     });
 	
-	$scope.$on('showClass',function(e, section){console.log('showClass');
+	$scope.$on('showClass',function(e, section){console.log('showClass: feed');
       $scope.section = section;
     });
 	
@@ -63,15 +119,13 @@ angular.module('klaseApp')
 		posterId: $scope.loggedInUserId
 	  })
 	  .then(function onSuccess(sailsResponse){
+	  	  clearPostFields();
 		  getPosts($scope.section.id);
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
-		
-		if (sailsResponse.status != 200) {
-			toastr.error('Error :(.', 'Error ' + sailsResponse.status);
-			return;
-		}
+		toastr.error('Error :(.', 'Error ' + sailsResponse.status);
+		return;
 	  });
     };
 
@@ -89,12 +143,12 @@ angular.module('klaseApp')
 			  'posterId': $scope.loggedInUserId
 			}
         }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ');
-			console.log(resp.data);
+        	toastr.success('Success', resp.config.data.file.name + ' uploaded.');
+			clearPostFields();
 			getPosts($scope.section.id);
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
 			toastr.error('Error :(.', resp.status);
+			clearPostFields();
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
@@ -103,9 +157,9 @@ angular.module('klaseApp')
 	
 	// upload later on form submit or something similar
     $scope.submit = function() {
-      if ($scope.form.file.$valid && $scope.file && $scope.message) {
+      if ($scope.form.$valid && $scope.file) {
         $scope.upload($scope.file);
-      } else if ($scope.message) {
+      } else if ($scope.form.$valid) {
         post();
       }
     };
@@ -115,8 +169,8 @@ angular.module('klaseApp')
 	 * **************************************************************/
 	$scope.deletePost = function(postId) {
 	  console.log('DELETE /post ' + postId);
-	  return;
-	  $http.delete('/post', {
+	  
+	  $http.put('/deletepost', {
 		id: postId
 	  })
 	  .then(function onSuccess(sailsResponse){
@@ -124,12 +178,15 @@ angular.module('klaseApp')
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
-		
-		if (sailsResponse.status != 200) {
-			toastr.error('Error :(.', 'Error ' + sailsResponse.status);
-			return;
-		}
+		toastr.error('Error :(.', 'Error ' + sailsResponse.status);
+		return;
 	  });
+	};
+
+	var clearPostFields = function() {
+		$scope.message = null;
+       	$scope.selectedSection = null;
+       	$scope.file = null;
 	};
 	
 	

@@ -1,0 +1,1040 @@
+*
+* Lines that start with '*' are comments
+* Commands for building a credits file are as follows
+*<X:n> n = 128 (absolute position), +10 or -10 (offset positions)
+*<Y:n>
+*<I:wwww,hhhh,aaa,TextureFilename.dds> wwww = how wide should the picture be, hhhh = how tall
+*				       aaa = alpha 255 opaque
+*<J:x> x = L (left justify), R (right justify), or C (center justify)
+*<F:x> x = font number from the Oblivion ini
+*<C:rrr,ggg,bbb,aaa> rrr = red color 0 - 255, ggg = green color
+*		     bbb = blue color for the font, aaa = alpha 255 opaque
+*
+* After each line the font height will be added to the y value and the x will be reset
+* to the last <X:n> position.
+*
+* Adding an image will create a polygon that is wwww x hhhh and fit the texture to it. The
+* y value will have the hhhh added to it and the x value will be reset to the last <X:n>.
+*
+* Images are stored in the Textures\Interface\Credits directory.
+*
+* Image wwww,hhhh MUST be 4 characters. Image aaa and Color rrr,ggg,bbb,aaa MUST be 3 characters.
+*
+*
+<X:-530><Y:0><J:L><F:7>
+
+
+
+
+
+<I:0256,0064,255,FalloutLogo.dds>
+
+
+<C:199,255,165,255>GAME DESIGN<Y:-6>
+<C:248,255,217,255>Bethesda Game Studios
+
+<C:199,255,165,255>GAME DIRECTOR &<Y:-15>
+EXECUTIVE PRODUCER<Y:-6>
+<C:248,255,217,255>Todd Howard
+
+<C:199,255,165,255>LEAD DESIGNER & WRITER<Y:-6>
+<C:248,255,217,255>Emil Pagliarulo
+
+<C:199,255,165,255>LEAD ARTIST<Y:-6>
+<C:248,255,217,255>Istvan Pely
+
+<C:199,255,165,255>PRODUCTION DIRECTOR<Y:-6>
+<C:248,255,217,255>Ashley Cheng
+
+<C:199,255,165,255>LEAD PRODUCER<Y:-6>
+<C:248,255,217,255>Gavin Carter
+
+<C:199,255,165,255>TECHNICAL DIRECTOR<Y:-6>
+<C:248,255,217,255>Guy Carver
+
+<C:199,255,165,255>LEAD PROGRAMMER<Y:-6>
+<C:248,255,217,255>Steve Meister
+
+<C:199,255,165,255>LEAD ANIMATOR<Y:-6>
+<C:248,255,217,255>Josh Jones
+
+<C:199,255,165,255>LEAD LEVEL DESIGNER<Y:-6>
+<C:248,255,217,255>Joel Burgess
+
+<C:199,255,165,255>AUDIO DIRECTOR<Y:-6>
+<C:248,255,217,255>Mark Lampert
+
+<C:199,255,165,255>QUALITY ASSURANCE LEAD<Y:-6>
+<C:248,255,217,255>Kevin Kauffman
+
+<C:199,255,165,255>PRODUCERS<Y:-6>
+<C:248,255,217,255>Jeff Gardiner<Y:-6>
+Craig Lafferty<Y:-6>
+Tim Lamb
+
+<C:199,255,165,255>ASSOCIATE PRODUCERS<Y:-6>
+<C:248,255,217,255>Angela Browder<Y:-6>
+Nathan X McDyer<Y:-6>
+
+<C:199,255,165,255>PROGRAMMING<Y:-6>
+<C:248,255,217,255>Brendan Anthony<Y:-6>
+Shannon Bailey<Y:-6>
+Jonathan Bilodeau<Y:-6>
+Erik Deitrick<Y:-6>
+David DiAngelo<Y:-6>
+Joseph DiAngelo<Y:-6>
+Joel Dinolt<Y:-6>
+Michael Dulany<Y:-6>
+Chris Esko<Y:-6>
+Scott Franke<Y:-6>
+Ricardo Gonzalez<Y:-6>
+Ahn Hopgood<Y:-6>
+Mat Krohn<Y:-6>
+Mike Lipari<Y:-6>
+Brian Robb<Y:-6>
+Joe Romano<Y:-6>
+Jeff Sheiman<Y:-6>
+Jean Simonet<Y:-6>
+Dan Teitel<Y:-6>
+Orin Tresnjak<Y:-6>
+Craig Walton<Y:-6>
+Jay Woodward
+
+<C:199,255,165,255>ADDITIONAL PROGRAMMING<Y:-6>
+<C:248,255,217,255>Joshua Andersen<Y:-6>
+Ryan Ashford<Y:-6>
+Brett Douville<Y:-6>
+Daniel Dunham<Y:-6>
+Paul Graber<Y:-6>
+Jason Hammett<Y:-6>
+Chris Hynes<Y:-6>
+Chris Innanen<Y:-6>
+Ryan Lea<Y:-6>
+Jeff Lundin<Y:-6>
+Nathan Nordfelt<Y:-6>
+Casey O’Toole<Y:-6>
+Dariush Samari<Y:-6>
+Jeff Ward
+
+<C:199,255,165,255>CONCEPT ART<Y:-6>
+<C:248,255,217,255>Adam Adamowicz
+
+<C:199,255,165,255>ADDITIONAL CONCEPT ART<Y:-6>
+<C:248,255,217,255>Craig Mullins
+
+<C:199,255,165,255>SPECIAL EFFECTS & GORE<Y:-6>
+<C:248,255,217,255>Grant Struthers
+
+<C:199,255,165,255>WORLD ART<Y:-6>
+<C:248,255,217,255>Andy Barron<Y:-6>
+Hope Adams<Y:-6>
+Noah Berry<Y:-6>
+Cory Edwards<Y:-6>
+Tony Greco<Y:-6>
+Daniel T. Lee<Y:-6>
+Nate Purkeypile<Y:-6>
+Rashad Redic<Y:-6>
+Megan Sawyer<Y:-6>
+Ryan Sears<Y:-6>
+Clara Struthers<Y:-6>
+Rafael Vargas<Y:-6>
+Robert Wisnewski<Y:-6>
+
+<C:199,255,165,255>ADDITIONAL WORLD ART<Y:-6>
+<C:248,255,217,255>Todd Broadwater<Y:-6>
+Miles Burrell<Y:-6>
+Matthew Carofano<Y:-6>
+Cory Dornbusch<Y:-6>
+Greg Kline<Y:-6>
+Ryan Salvatore
+
+<C:199,255,165,255>CHARACTER ART & ANIMATION<Y:-6>
+<C:248,255,217,255>Ben Carnow<Y:-6>
+Jangjoon Cha<Y:-6>
+Hiu Lai Chong<Y:-6>
+Jonah Lobe<Y:-6>
+Gary Noonan<Y:-6>
+Dane Olds<Y:-6>
+Juan Sanchez
+
+<C:199,255,165,255>ADDITIONAL CHARACTER<Y:-15>
+ART & ANIMATION<Y:-6>
+<C:248,255,217,255>Liz Beetem<Y:-6>
+Christiane Meister<Y:-6>
+Hugh Riley<Y:-6>
+Massive Black<Y:-6>
+Liquid Development 
+
+<C:199,255,165,255>ILLUSTRATION<Y:-6>
+<C:248,255,217,255>Natalia Smirnova
+
+<C:199,255,165,255>QUEST DESIGN & WRITING<Y:-6>
+<C:248,255,217,255>Erik J. Caponi<Y:-6>
+Brian Chapin<Y:-6>
+Jon Paul Duvall<Y:-6>
+Kurt Kuhlmann<Y:-6>
+Alan Nanes<Y:-6>
+Bruce Nesmith<Y:-6>
+Fred Zeleny
+
+<C:199,255,165,255>ADDITIONAL QUEST<Y:-15>
+DESIGN & WRITING<Y:-6>
+<C:248,255,217,255>Nate Ellis<Y:-6>
+William Killeen<Y:-6>
+Mark Nelson<Y:-6>
+Justin McSweeney
+
+<C:199,255,165,255>LEVEL DESIGN<Y:-6>
+<C:248,255,217,255>Daryl Brigner<Y:-6>
+Jeff Browne<Y:-6>
+Phil Nelson
+
+<C:199,255,165,255>ADDITIONAL LEVEL DESIGN<Y:-6>
+<C:248,255,217,255>Ryan Redetzke<Y:-6>
+Mike Ryan<Y:-6>
+Jesse Tucker
+
+<C:199,255,165,255>QUALITY ASSURANCE<Y:-15>
+PLATFORM LEADS<Y:-6>
+<C:248,255,217,255>James Costantino<Y:-6>
+Chris Krietz
+
+<C:199,255,165,255>QUALITY ASSURANCE<Y:-6>
+<C:248,255,217,255>Jared Angus<Y:-6>
+Ryan Ashford<Y:-6>
+Sam Bernstein<Y:-6>
+Nick Brothers<Y:-6>
+Rob Clark<Y:-6>
+Cory Dornbusch<Y:-6>
+Terry Dunn<Y:-6>
+Nate Ellis<Y:-6>
+Phil Georgatos<Y:-6>
+Dan Geske<Y:-6>
+Mike Lattanzia<Y:-6>
+Ryan Lea<Y:-6>
+Jason Little<Y:-6>
+Mike McGinn<Y:-6>
+Justin McSweeney<Y:-6>
+Aaron Mitschelen<Y:-6>
+Jennifer Noland<Y:-6>
+Jonathan Peake<Y:-6>
+John Pisano<Y:-6>
+Louis Riley<Y:-6>
+Dan Ross<Y:-6>
+Ryan Salvatore<Y:-6>
+Matt Spahlinger<Y:-6>
+Chris Steidel<Y:-6>
+Larry Waldman<Y:-6>
+Matt Weil
+
+<C:199,255,165,255>ADDITIONAL QUALITY ASSURANCE<Y:-6>
+<C:248,255,217,255>Alex Agnew<Y:-6>
+Brandon Allen<Y:-6>
+Ray Arnett<Y:-6>
+Ruben Brown<Y:-6>
+Jabarie Brown<Y:-6>
+Brian Bloomfield<Y:-6>
+Michael Christensen<Y:-6>
+Steve Fraden<Y:-6>
+Luke Fisher<Y:-6>
+Phil Glaser<Y:-6>
+Carlos Guice<Y:-6>
+Nghi Huynh<Y:-6>
+Hal Jenkins<Y:-6>
+Brent Krische
+Mike Mazzuca<Y:-6>
+Russel Scrivens<Y:-6>
+Tom Smilack<Y:-6>
+Alex Souder<Y:-6>
+Alex Tran<Y:-6>
+Tihana Tresnjak-Smith<Y:-6>
+Jesse Tucker<Y:-6>
+Ted Wray<Y:-6>
+Fred Zeleny
+
+<C:199,255,165,255>ADMINISTRATIVE ASSISTANT<Y:-6>
+<C:248,255,217,255>Emily Sears
+
+<C:199,255,165,255>VIDEO DESIGN & PRODUCTION<Y:-6>
+<C:248,255,217,255>Steve Green<Y:-6>
+Matt Killmon
+
+<C:199,255,165,255>ORIGINAL MUSIC<Y:-15>
+COMPOSED & PRODUCED BY<Y:-6>
+<C:248,255,217,255>Inon Zur
+<C:248,255,217,255>www.inonzur.com
+
+
+<C:199,255,165,255>VOICEOVERS<Y:-6>
+
+<C:199,255,165,255>DAD<Y:-6>
+<C:248,255,217,255>Liam Neeson
+
+<C:199,255,165,255>PRESIDENT EDEN<Y:-6>
+<C:248,255,217,255>Malcolm McDowell
+
+<C:199,255,165,255>NARRATOR<Y:-6>
+<C:248,255,217,255>Ron Perlman
+
+<C:199,255,165,255>AMATA<Y:-6>
+<C:248,255,217,255>Odette Yustman
+
+<C:199,255,165,255>STANLEY, HANNIBAL HAMLIN,<Y:-15>
+SERGEANT RL-3<Y:-6>
+<C:248,255,217,255>Jeff Baker
+
+<C:199,255,165,255>ELDER LYONS<Y:-6>
+<C:248,255,217,255>William Bassett
+
+<C:199,255,165,255>MOM, MOIRA<Y:-6>
+<C:248,255,217,255>Karen Carbone
+
+<C:199,255,165,255>GROUSE<Y:-6>
+<C:248,255,217,255>Johnny Contino
+
+<C:199,255,165,255>THREE DOG<Y:-6>
+<C:248,255,217,255>Erik Todd Dellums
+
+<C:199,255,165,255>NATHAN, ABRAHAM WASHINGTON,<Y:-15>
+TREE FATHER BIRCH<Y:-6>
+<C:248,255,217,255>Paul Eiding
+
+<C:199,255,165,255>BEATRICE, REILLY,<Y:-15>
+STAR PALADIN CROSS<Y:-6>
+<C:248,255,217,255>Shari Elliker
+
+<C:199,255,165,255>COLONEL AUTUMN,<Y:-15>
+CONFESSOR CROMWELL<Y:-6>
+<C:248,255,217,255>Peter Gil
+
+<C:199,255,165,255>JONAS, DAVE, PINKERTON<Y:-6>
+<C:248,255,217,255>Gregory Gorton
+
+<C:199,255,165,255>OVERSEER, DUKOV,<Y:-15>
+SCRIBE ROTHCHILD<Y:-6>
+<C:248,255,217,255>Duncan Hood
+
+<C:199,255,165,255>ONE YEAR BABY<Y:-6>
+<C:248,255,217,255>Jake Howard
+
+<C:199,255,165,255>LUCY WEST, CLOVER,<Y:-15>
+SIERRA PETROVITA<Y:-6>
+<C:248,255,217,255>Jan Johns
+
+<C:199,255,165,255>MR. BURKE, FAWKES<Y:-6>
+<C:248,255,217,255>Wes Johnson
+
+<C:199,255,165,255>YOUNG AMATA, MAGGIE, LUCY<Y:-6>
+<C:248,255,217,255>Stephanie Joy
+
+<C:199,255,165,255>YOUNG PAUL HANNON<Y:-6>
+<C:248,255,217,255>Luke Lafferty
+
+<C:199,255,165,255>MR. BROTCH, JERICHO,<Y:-15>
+EULOGY JONES<Y:-6>
+<C:248,255,217,255>James Lewis
+
+<C:199,255,165,255>YOUNG WALLY MACK,<Y:-15>
+HARDEN SIMMS<Y:-6>
+<C:248,255,217,255>Sean McCoy
+
+<C:199,255,165,255>SENTINEL LYONS<Y:-6>
+<C:248,255,217,255>Heather Marsden
+
+<C:199,255,165,255>DOCTOR LI<Y:-6>
+<C:248,255,217,255>Jennifer Massey
+
+<C:199,255,165,255>TIMMY NEUSBAUM<Y:-6>
+<C:248,255,217,255>Cullen Pagliarulo
+
+<C:199,255,165,255>CHIEF GUSTAVO, PALADIN VARGAS<Y:-6>
+<C:248,255,217,255>Pete Papageorge
+
+<C:199,255,165,255>COLIN MORIARTY, DOCTOR LESKO,<Y:-15>
+CHARON<Y:-6>
+<C:248,255,217,255>Mike Rosson
+
+<C:199,255,165,255>ANDY, MISTER BUCKINGHAM,<Y:-15>
+THE GREAT ONE<Y:-6>
+<C:248,255,217,255>Stephen Russell
+
+<C:199,255,165,255>BUTCH, HARKNESS<Y:-6>
+<C:248,255,217,255>Craig Sechler
+
+<C:199,255,165,255>OLD LADY PALMER, AGATHA,<Y:-15>
+MARGARET PRIMROSE<Y:-6>
+<C:248,255,217,255>Diana Sowle
+
+<C:199,255,165,255>YOUNG BUTCH, MAYOR MACCREADY<Y:-6>
+<C:248,255,217,255>Jakob Stalnaker
+
+<C:199,255,165,255>BETTY<Y:-6>
+<C:248,255,217,255>Corrieanne Stein
+
+<C:199,255,165,255>ARMITAGE, BUTCHER,<Y:-15>
+PALADIN GUNNY<Y:-6>
+<C:248,255,217,255>Gus Travers
+
+<C:199,255,165,255>ALLISTAIR TENPENNY<Y:-6>
+<C:248,255,217,255>Charlie Warren
+
+<C:199,255,165,255>TULIP, GRETA, CAROL<Y:-6>
+<C:248,255,217,255>Audrey Wasilewski
+
+<C:199,255,165,255>LUCAS SIMMS<Y:-6>
+<C:248,255,217,255>Greg Williams
+
+
+<C:199,255,165,255>VOICE CASTING SERVICES<Y:-6>
+<C:248,255,217,255>Lev Chapelsky, Blindlight LLC
+
+<C:199,255,165,255>VOICE RECORDING AT<Y:-6>
+<C:248,255,217,255>Bethesda Game Studios, Rockville, MD<Y:-6>
+Absolute Pitch Studios, Bethesda, MD<Y:-6>
+The Audio Department, New York, NY<Y:-6>
+Morris Creative Services, Boston, MA<Y:-6>
+North Hollywood Sound, North Hollywood, CA<Y:-6>
+Levels, Hollywood, CA<Y:-6>
+Juice, Santa Monica, CA
+
+
+<C:199,255,165,255><F:8>BETHESDA SOFTWORKS<F:7><Y:-15>
+
+<C:199,255,165,255>PRODUCT MANAGER &<Y:-15>
+VICE PRESIDENT OF PR/MARKETING<Y:-6>
+<C:248,255,217,255>Pete Hines
+
+<C:199,255,165,255>PR & MARKETING MANAGER<Y:-6>
+<C:248,255,217,255>Erin Losi
+
+<C:199,255,165,255>PUBLIC RELATIONS<Y:-6>
+<C:248,255,217,255>Kate Isenberg<Y:-6>
+Tracey Thompson
+
+<C:199,255,165,255>COMMUNITY MANAGER<Y:-6>
+<C:248,255,217,255>Matt Grandstaff
+
+<C:199,255,165,255>GRAPHIC DESIGN<Y:-6>
+<C:248,255,217,255>Lindsay Wescott<Y:-6>
+Michael Wagner
+
+<C:199,255,165,255>PR & MARKETING COORDINATOR<Y:-6>
+<C:248,255,217,255>Angela Ramsey
+
+<C:199,255,165,255>DIRECTOR OF QUALITY ASSURANCE <Y:-6>
+<C:248,255,217,255>Darren Manes
+
+<C:199,255,165,255>QUALITY ASSURANCE MANAGER<Y:-6>
+<C:248,255,217,255>Rob Gray
+
+<C:199,255,165,255>VICE PRESIDENT OF SALES<Y:-6>
+<C:248,255,217,255>Ron Seger
+
+<C:199,255,165,255>SALES<Y:-6>
+<C:248,255,217,255>Jill Bralove<Y:-6>
+<C:248,255,217,255>Michelle Burgess<Y:-6>
+Sarah Skelley
+
+<C:199,255,165,255>VICE PRESIDENT OF DEVELOPMENT<Y:-6>
+<C:248,255,217,255>Todd Vaughn
+
+<C:199,255,165,255>PRESIDENT<Y:-6>
+<C:248,255,217,255>Vlatko Andonov
+
+
+
+
+
+<C:199,255,165,255><F:8>ZENIMAX MEDIA INC.<F:7><Y:-15>
+
+<C:199,255,165,255>CEO<Y:-6>
+<C:248,255,217,255>Robert Altman
+
+<C:199,255,165,255>PRESIDENT<Y:-6>
+<C:248,255,217,255>Ernie Del
+
+<C:199,255,165,255>COO<Y:-6>
+<C:248,255,217,255>Jamie Leder
+
+<C:199,255,165,255>CFO<Y:-6>
+<C:248,255,217,255>Cindy Tallent
+
+<C:199,255,165,255>GENERAL COUNSEL<Y:-6>
+<C:248,255,217,255>Grif Lesher
+
+<C:199,255,165,255>CONTROLLER<Y:-6>
+<C:248,255,217,255>Denise Kidd
+
+<C:199,255,165,255>LEGAL LEAD<Y:-6>
+<C:248,255,217,255>Marcia Mitnick
+
+<C:199,255,165,255>LEGAL<Y:-6>
+<C:248,255,217,255>Diana Bender<Y:-6>
+Josh Gillespie
+
+<C:199,255,165,255>HUMAN RESOURCES<Y:-6>
+<C:248,255,217,255>Tammy Boyd-Shumway<Y:-6>
+Michelle Cool<Y:-6>
+Valery St. Preux
+
+<C:199,255,165,255>ADMINISTRATION<Y:-6>
+<C:248,255,217,255>Katherine Edwards<Y:-6>
+Gerard Garnica<Y:-6>
+Melissa Goolsby<Y:-6>
+Kattiya Leeawtnakul<Y:-6>
+Barb Manning<Y:-6>
+Patti Pulupa<Y:-6>
+Heather Spurrier<Y:-6>
+Eric Weis
+
+<C:199,255,165,255>VICE PRESIDENT,<Y:-15>
+INFORMATION TECHNOLOGY<Y:-6>
+<C:248,255,217,255>Steve Bloom
+
+<C:199,255,165,255>INFORMATION TECHNOLOGY<Y:-6>
+<C:248,255,217,255>Josh Buckley<Y:-6>
+Colin Doyle<Y:-6>
+Jeremy Galuski<Y:-6>
+Peter Garriott<Y:-6>
+Rob Havlovick<Y:-6>
+Joe Owens<Y:-6>
+Paul Tuttle<Y:-6>
+Keelian Wardle
+
+<C:199,255,165,255>ADMINISTRATIVE ASSISTANTS<Y:-6>
+<C:248,255,217,255>Bernice Guice<Y:-6>
+Amber Hinden<Y:-6>
+Lauren Martinho<Y:-6>
+Rissa Rachmadila
+
+<C:199,255,165,255>RECEPTIONIST<Y:-6>
+<C:248,255,217,255>Paula Kasey
+
+<C:199,255,165,255>EXECUTIVE CHEF<Y:-6>
+<C:248,255,217,255>Kenny McDonald
+
+
+
+
+
+<C:199,255,165,255><F:8>ZENIMAX EUROPE LTD.<F:7><Y:-15>
+
+<C:199,255,165,255>MANAGING DIRECTOR<Y:-6>
+<C:248,255,217,255>Sean Brennan
+
+<C:199,255,165,255>EUROPEAN SALES DIRECTOR<Y:-6>
+<C:248,255,217,255>Greg Baverstock
+
+<C:199,255,165,255>EUROPEAN MARKETING & PR DIRECTOR<Y:-6>
+<C:248,255,217,255>Christina Camerota
+
+<C:199,255,165,255>UK SALES DIRECTOR<Y:-6>
+<C:248,255,217,255>Paul Oughton
+
+<C:199,255,165,255>SALES AND TRADE MARKETING MANAGER<Y:-6>
+<C:248,255,217,255>Rebecca Lindon
+
+<C:199,255,165,255>EUROPEAN OPERATIONS<Y:-6>
+<C:248,255,217,255>Isabelle Midrouilet
+
+<C:199,255,165,255>FINANCE DIRECTOR<Y:-6>
+<C:248,255,217,255>Robert Ford
+
+<C:199,255,165,255>EUROPEAN CONTROLLER<Y:-6>
+<C:248,255,217,255>Paul New
+
+<C:199,255,165,255>SALES AND MARKETING ASSISTANT<Y:-6>
+<C:248,255,217,255>Natalie Gausden
+
+<C:199,255,165,255>OFFICE MANAGER<Y:-6>
+<C:248,255,217,255>Angie Clement
+
+
+
+<C:199,255,165,255><F:8>ZENIMAX ASIA K.K.<F:7><Y:-15>
+
+<C:199,255,165,255>GENERAL MANAGER<Y:-6>
+<C:248,255,217,255>Tetsu Takahashi
+
+<C:199,255,165,255>LOCALIZATION PRODUCER<Y:-6>
+<C:248,255,217,255>Kei Iwamoto
+
+<C:199,255,165,255>LOCALIZATION PROGRAMMER<Y:-6>
+<C:248,255,217,255>Masayuki Nagahashi
+
+<C:199,255,165,255>ASSOCIATE PRODUCER<Y:-6>
+<C:248,255,217,255>Takayuki Tanaka<Y:-6>
+<C:248,255,217,255>Takuya Shiomi
+
+<C:199,255,165,255>MARKETING & PR MANAGER<Y:-6>
+<C:248,255,217,255>Sunaho Hiraoka
+
+<C:199,255,165,255>WEB DIRECTOR<Y:-6>
+<C:248,255,217,255>Keisuke Tanaka
+
+<C:199,255,165,255>SALES MANAGER<Y:-6>
+<C:248,255,217,255>Rica Terajima
+
+<C:199,255,165,255>OFFICE MANAGER<Y:-6>
+<C:248,255,217,255>Myongsuk Rim
+
+
+
+
+
+<C:199,255,165,255>LOCALIZATION<Y:-6>
+<C:248,255,217,255>Babel Media
+
+<C:199,255,165,255>PRODUCER<Y:-6>
+<C:248,255,217,255>Emma Timms
+
+<C:199,255,165,255>LOCALIZATION MANAGER<Y:-6>
+<C:248,255,217,255>Jean-Sébastien Ferey
+
+<C:199,255,165,255>AUDIO MANAGER<Y:-6>
+<C:248,255,217,255>Adam Chapman
+
+<C:199,255,165,255>SENIOR QA COORDINATOR<Y:-6>
+<C:248,255,217,255>Stephen Alexander
+
+<C:199,255,165,255>LEAD TESTERS<Y:-6>
+<C:248,255,217,255>Gaëlle D’Addario<Y:-6>
+Sebastien Krebs<Y:-6>
+Liam O’Connell<Y:-6>
+Pino Piccolella<Y:-6>
+Oliver San Blas<Y:-6>
+
+<C:199,255,165,255>FRENCH TEST TEAM<Y:-6>
+<C:248,255,217,255>Xavier Bottou<Y:-6>
+Geoffrey Coulon<Y:-6>
+Yanis El Atmani<Y:-6>
+
+<C:199,255,165,255>GERMAN TEST TEAM<Y:-6>
+<C:248,255,217,255>Barbara Horras<Y:-6>
+Birthe Justus<Y:-6>
+Jonas Pohlmann<Y:-6>
+Norbert Van Cleve<Y:-6>
+
+<C:199,255,165,255>ITALIAN TEST TEAM<Y:-6>
+<C:248,255,217,255>Luca Bolognesi<Y:-6>
+Antonio Dell Aquila<Y:-6>
+Vasiliki Koskiniotis<Y:-6>
+
+<C:199,255,165,255>SPANISH TEST TEAM<Y:-6>
+<C:248,255,217,255>Ricardo Garcia<Y:-6>
+Daniel Giordano<Y:-6>
+Isac Jimenez<Y:-6>
+
+<C:199,255,165,255>TRANSLATORS<Y:-6>
+
+<C:199,255,165,255>LEAD FRENCH TRANSLATOR<Y:-6>
+<C:248,255,217,255>Claude Esmein
+
+<C:199,255,165,255>FRENCH TEAM<Y:-6>
+<C:248,255,217,255>Frédéric Dalmasso
+Xavier Kemmlein<Y:-6>
+
+<C:199,255,165,255>LEAD GERMAN TRANSLATOR<Y:-6>
+<C:248,255,217,255>Hannes Gilli<Y:-6>
+
+<C:199,255,165,255>GERMAN TEAM<Y:-6>
+<C:248,255,217,255>Hans Brechtel<Y:-6>
+Thorsten Distler<Y:-6>
+Tanja Engler<Y:-6>
+Axel Kircher<Y:-6>
+Eva Stabenow<Y:-6>
+
+<C:199,255,165,255>LEAD ITALIAN TRANSLATOR<Y:-6>
+<C:248,255,217,255>Elisa Grattapaglia (Amber Translation Team)<Y:-6>
+
+<C:199,255,165,255>ITALIAN TEAM<Y:-6>
+<C:248,255,217,255>Riccardo Fassone (Amber Translation Team)<Y:-6>
+Luca Ruella (Amber Translation Team)<Y:-6>
+Lara Ferrulli<Y:-6>
+GMT (Global Multilingual Translations)<Y:-6>
+ThinkAMDS<Y:-6>
+
+<C:199,255,165,255>LEAD SPANISH TRANSLATOR<Y:-6>
+<C:248,255,217,255>Diana Díaz Montón (Wordlab Translations)<Y:-6>
+
+<C:199,255,165,255>SPANISH TEAM<Y:-6>
+<C:248,255,217,255>Javier Alonso (Wordlab Translations)<Y:-6>
+Jesús Calzado (Wordlab Translations)<Y:-6>
+Ruth García Ordóñez (Wordlab Translations)<Y:-6>
+Andrés Pérez Cañestro (Wordlab Translations)<Y:-6>
+Benjamin A. Bazounguissa<Y:-6>
+
+<C:199,255,165,255>FRENCH RECORDING STUDIO<Y:-6>
+<C:248,255,217,255>Hi-Fi Genie Productions<Y:-6>
+
+<C:199,255,165,255>GERMAN RECORDING STUDIO<Y:-6>
+<C:248,255,217,255>M&S Music<Y:-6>
+
+<C:199,255,165,255>ITALIAN RECORDING STUDIO<Y:-6>
+<C:248,255,217,255>Local Transit<Y:-6>
+
+<C:199,255,165,255>SPANISH RECORDING STUDIO<Y:-6>
+<C:248,255,217,255>Pink Noise<Y:-6>
+
+<C:199,255,165,255>LEAD DIALOGUE POST PRODUCTION ENGINEER<Y:-6>
+<C:248,255,217,255>Daan Hendriks<Y:-6>
+
+<C:199,255,165,255>DIALOGUE POST PRODUCTION TEAM<Y:-6>
+<C:248,255,217,255>Jeremy Paul Carroll<Y:-6>
+Tom Cole<Y:-6>
+Amaury Doux<Y:-6>
+Michael Dunn<Y:-6>
+Hugh Edwards<Y:-6>
+Matthew Hurry<Y:-6>
+Tammo Kloeckner<Y:-6>
+Ilona Pettersson<Y:-6>
+Mary Snee<Y:-6>
+Frank Sutherland<Y:-6>
+Jono Watts<Y:-6>
+
+<C:199,255,165,255>LOCALIZATION SPECIAL THANKS<Y:-6>
+<C:248,255,217,255>Sergio Massabò<Y:-6>
+
+
+
+
+
+<C:199,255,165,255>MUSIC SUPERVISION & CLEARANCE<Y:-6>
+<C:248,255,217,255>Christopher S. Parker & Tim Scanlin
+<C:248,255,217,255>of Brandracket, LLC
+
+
+<C:248,255,217,255>"I DON’T WANT TO SET THE WORLD ON FIRE"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Bennie Benjamin, Eddie Durham,<Y:-15>
+Sol Marcus, Eddie Seiler<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>The Ink Spots<Y:-40>
+
+Copyright 1940 (Renewed) Bennie Benjamin Music, Inc.<Y:-15>
+administered by Chappell & Co. (ASCAP),<Y:-15>
+Eddie Durham Swing Music Publishing (ASCAP)<Y:-15>
+administered by Bug, Ocheri Publishing Corp. (ASCAP),<Y:-15>
+Carlin Music Publishing Canada, Inc. (SOCAN)<Y:-15>
+on behalf of Redwood Music Limited (PRS)<Y:-15>
+International Rights Secured. All Rights Reserved.<Y:-15>
+Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Geffen Records under license from<Y:-15>
+Universal Music Enterprises
+
+
+<C:248,255,217,255>"ANYTHING GOES"<Y:-40>
+
+<C:199,255,165,255>WRITTEN & PERFORMED BY<Y:-6>
+<C:248,255,217,255>Cole Porter<Y:-40>
+
+Copyright 1934 (Renewed) WB Music Corp. (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>RCA Records<Y:-40>
+
+By Arrangement with SONY BMG ENTERTAINMENT
+
+
+<C:248,255,217,255>"A WONDERFUL GUY"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Richard Rodgers & Oscar Hammerstein II<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Tex Beneke<Y:-40>
+
+Copyright 1949 Williamson Music (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Soundies Inc.<Y:-40>
+
+By Arrangement with DePugh Music
+
+
+<C:248,255,217,255>"BOOGIE MAN"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"BUTCHER PETE (PART 1)"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Roy Brown & Henry Glover<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Roy Brown<Y:-40>
+
+Copyright 1949 Arc Music Corp. (BMI),<Y:-15>
+Brown Angel Music Publishing (BMI),<Y:-15>
+Fort Knox Music Inc. (BMI), T/Q Music, Inc.<Y:-15>
+d/b/a Trio Music Company (BMI),<Y:-15>
+International Rights Secured. All Rights Reserved.<Y:-15>
+Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Global Licensing Inc.<Y:-40>
+
+By Arrangement with Warner Music Group<Y:-15>
+Video Game Licensing
+
+
+<C:248,255,217,255>"CRAZY HE CALLS ME"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Bob Russell & Carl Sigman<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Billie Holiday<Y:-40>
+
+Copyright 1949 Music Sales Corporation (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>The Verve Music Group under license from<Y:-15>
+Universal Music Enterprises
+
+
+<C:248,255,217,255>"CIVILIZATION"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Bob Hilliard & Carl Sigman<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Danny Kaye with the Andrews Sisters<Y:-40>
+
+Copyright 1947 Better Half Music Co. (ASCAP) &<Y:-15>
+Music Sales Corporation (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-15>
+International Copyright Secured.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Geffen Records under license from<Y:-15>
+Universal Music Enterprises
+
+
+<C:248,255,217,255>"EASY LIVING"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Ralph Rainger & Leo Robin<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Billie Holiday<Y:-40>
+
+Copyright 1937 Sony/ATV Music Publishing LLC.<Y:-15>
+All rights administered by Sony/ATV Music Publishing<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Columbia Records<Y:-40>
+
+By Arrangement with SONY BMG ENTERTAINMENT
+
+
+<C:248,255,217,255>"FOX BOOGIE"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"HAPPY TIMES"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Sylvia Fine<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Bob Crosby & The Bobcats<Y:-40>
+
+Copyright 1949 (Renewed) Warner Bros. Inc. (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Soundies Inc.<Y:-40>
+
+By Arrangement with DePugh Music
+
+
+"I’M TICKLED PINK"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"INTO EACH LIFE SOME RAIN MUST FALL"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Doris Fisher & Allan Roberts<Y:-40>
+
+Copyright 1944 by Universal Music Corp. on behalf of<Y:-15>
+Allan Roberts Music (ASCAP)<Y:-15>
+& Doris Fisher Music Corp. (ASCAP)<Y:-15>
+All rights in US for Allan Roberts Music (ASCAP)<Y:-15>
+administered by Music Sales Corporation (ASCAP)<Y:-15>
+International Copyright Secured. All Rights Reserved.<Y:-15>
+Used by Permission.<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Ella Fitzgerald<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>The Verve Music Group under license from<Y:-15>
+Universal Music Enterprises
+
+
+<C:248,255,217,255>"JAZZY INTERLUDE"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"JOLLY DAYS"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"LET'S GO SUNNING"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"MAYBE"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Frank Madden & Allen Flynn<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>The Ink Spots<Y:-40>
+
+Copyright 1935 EMI Entertainment World, Inc. o/b/o<Y:-15>
+EMI Robbins Catalog Inc. (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Geffen Records under license from<Y:-15>
+Universal Music Enterprises
+
+
+<C:248,255,217,255>"MIGHTY, MIGHTY MAN"<Y:-40>
+
+<C:199,255,165,255>WRITTEN & PERFORMED BY<Y:-6>
+<C:248,255,217,255>Roy Brown<Y:-40>
+
+Copyright 1949 by Arc Music Corp. (BMI),<Y:-15>
+Brown Angel Music Publishing (BMI),<Y:-15>
+Fort Knox Music Inc. (BMI),<Y:-15>
+International Rights Secured. All Rights Reserved.<Y:-15>
+Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Global Licensing Inc.<Y:-40>
+
+By Arrangement with Warner Music Group Video Game Licensing
+
+
+<C:248,255,217,255>"RHYTHM FOR YOU"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"SWING DOORS"<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>APM Music, Inc.
+
+
+<C:248,255,217,255>"WAY BACK HOME"<Y:-40>
+
+<C:199,255,165,255>WRITTEN BY<Y:-6>
+<C:248,255,217,255>Al Lewis & Tom Waring<Y:-40>
+
+<C:199,255,165,255>PERFORMED BY<Y:-6>
+<C:248,255,217,255>Bob Crosby & The Bobcats<Y:-40>
+
+Copyright 1935 Sovereign Music Company (ASCAP),<Y:-15>
+WB Music Corp. (ASCAP)<Y:-15>
+All Rights Reserved. Used by Permission.<Y:-40>
+
+<C:199,255,165,255>COURTESY OF<Y:-6>
+<C:248,255,217,255>Soundies Inc.<Y:-40>
+
+By Arrangement with DePugh Music
+
+
+<C:199,255,165,255>VIOLIN PERFORMANCE<Y:-6>
+<C:248,255,217,255>Heather MacArthur
+
+<C:199,255,165,255>SPECIAL THANKS<Y:-6>
+<C:248,255,217,255>Gabe Ahn<Y:-6>
+Andrew Beatty<Y:-6>
+Greg Bedwell<Y:-6>
+Con Bradley<Y:-6>
+Chenelle Bremont<Y:-6>
+Tim Cain<Y:-6>
+Chris Clark<Y:-6>
+Greg Crescimanno<Y:-6>
+Timothy Cubbison<Y:-6>
+Bruce Dawson<Y:-6>
+Martin Day<Y:-6>
+Blake Fischer<Y:-6>
+Mike Foster<Y:-6>
+Mark Griffin<Y:-6>
+Vernon Harmon<Y:-6>
+Paul Huggett<Y:-6>
+Vik Long<Y:-6>
+Jason Manley<Y:-6>
+Michelle McNamara<Y:-6>
+James Miller<Y:-6>
+Ross O'Dwyer<Y:-6>
+Andrew Thomas Pinski<Y:-6>
+Jeff Sullivan<Y:-6>
+David Tapang<Y:-6>
+Kelly Tofte<Y:-6>
+David Wong
+
+
+<C:199,255,165,255>GRIM REAPER’S SPRINT PERK<Y:-6>
+<C:248,255,217,255>Marc-Andre Deslongchamps 
+
+
+
+<C:199,255,165,255>LEGAL<Y:-6>
+<C:248,255,217,255>Fallout(R) 3 (C) 2008 Bethesda Softworks LLC, a ZeniMax Media company.<Y:-15>
+Bethesda Softworks, Bethesda Game Studios, ZeniMax and related logos<Y:-15>
+are registered trademarks or trademarks of ZeniMax Media Inc. in the<Y:-15>
+U.S. and/or other countries. Fallout, Prepare for the Future and<Y:-15>
+related logos are trademarks or registered trademarks of<Y:-15>
+Bethesda Softworks LLC in the U.S. and/or other countries.
+
+Uses Havok(TM). (C) Copyright 1999-2008 Havok.com Inc.<Y:-15>
+(or its licensors). All Rights Reserved.<Y:-15>
+See www.havok.com for details.
+
+Portions of this software utilize SpeedTree technology.(C) 2001-2004<Y:-15>
+Interactive Data Visualization, Inc. SpeedTree(R) is a registered<Y:-15>
+trademark of Interactive Data Visualization, Inc. All rights reserved. 
+
+Uses Bink Video. Copyright (C) 1997-2007 by RAD Game Tools, Inc.<Y:-15>
+All rights reserved.
+
+Uses Gamebryo software (C) 1999-2006 Emergent Game Technologies.<Y:-15>
+All rights reserved.
+
+FaceGen from Singular Inversions, Inc. FaceFX software used for<Y:-15>
+facial animation. (C) 2002-2006, OC3 Entertainment, Inc. and its<Y:-15>
+licensors. All Rights Reserved.
+<I:0512,0128,255,ThirdPartyLogos.dds>
+
+
+<C:199,255,165,255>FALLOUT 3<Y:-6>
+<C:248,255,217,255>Copyright 2008 Bethesda Softworks<Y:-15>
+fallout.bethsoft.com

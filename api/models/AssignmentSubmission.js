@@ -19,9 +19,21 @@ module.exports = {
     title : {
       type: 'string'
     },
+
+    message : {
+      type: 'string'
+    },
     
     score : {
       type: 'integer'
+    },
+
+    file: {
+      type: 'string'
+    },
+
+    filename: {
+      type: 'string'
     },
     
     postDate : {
@@ -32,6 +44,10 @@ module.exports = {
     studentId: {
       type: 'integer',
       columnName: 'student_id'
+    },
+
+    student: {
+      model: 'User'
     },
     
     assignmentId: {

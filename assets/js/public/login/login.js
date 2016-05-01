@@ -157,6 +157,22 @@ angular.module('klaseApp')
       $scope.showClass = true;
       $scope.$broadcast('classPosts', section);
     });
+
+    /* **************************************************************
+     * get class grades event
+     * **************************************************************/
+    $scope.$on('getClassGrades', function(e, section){
+      $scope.showClass = true;
+      $scope.$broadcast('classGrades', section);
+    });
+
+    /* **************************************************************
+     * get class members event
+     * **************************************************************/
+    $scope.$on('requestClassMembers', function(e, section){
+      $scope.showClass = true;
+      $scope.$broadcast('getClassMembers', section);
+    });
     
     /* **************************************************************
      * show profile event

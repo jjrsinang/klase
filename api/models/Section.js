@@ -48,6 +48,16 @@ module.exports = {
     semester: {
       type: 'string'
     },
+
+    slotsLimit: {
+      type: 'integer',
+      columnName: 'slots_limit'
+    },
+
+    availableSlots: {
+      type: 'integer',
+      columnName: 'available_slots'
+    },
     
     teacherId: {
       type: 'integer',

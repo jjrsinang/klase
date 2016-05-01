@@ -25,6 +25,12 @@ angular.module('klaseApp')
       else if ($scope.tab == 2) {
         $scope.$emit('getClassActivities', $scope.section);
       }
+      else if ($scope.tab == 3) {
+        $scope.$emit('getClassGrades', $scope.section);
+      }
+      else if ($scope.tab == 4) {
+        $scope.$emit('requestClassMembers', $scope.section);
+      }
     });
     
     /* **************************************************************

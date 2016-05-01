@@ -1,59 +1,16 @@
 <div ng-controller="ClassFeedCtrl as feed" class="feed-container">
+    
+    <!-- post material/announcement -->
     <div class="post-input img-rounded">
-        
-        <!-- tabs -->
-        <ul class="nav nav-tabs" ng-hide="loggedInUserRole == 'Student'">
-            <li ng-class="{ active:isSet(1) }">
-                <a href ng-click="setTab(1)">Post</a>
-            </li>
-            <li ng-class="{ active:isSet(2) }">
-                <a href ng-click="setTab(2)">Activity</a>
-            </li>
-        </ul>
-        
-        <!-- post note 
-        <form ng-show="isSet(1) && loggedInUserRole != 'Student'" 
-                id="uploadForm"
-                enctype="multipart/form-data"
-                action="/file/upload"
-                method="post">
-            <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here"></textarea>
-            <input type="hidden" value="{{ section.id }}" name="sectionId" />
-            <input type="hidden" value="{{ loggedInUserId }}" name="posterId" />
-            <span class="btn btn-default btn-file">
-                Browse <input type="file" ng-model="file" name="uploadFile" fileread="file" onchange='$("#upload-file-class-feed-post").html($(this).val());' />
-            </span>
-            <span id="upload-file-class-feed-post"></span>
-            
-            <input type="submit" class="btn btn-primary" value="Post" ng-click="post()">
-        </form>
-        -->
-        <!-- test post -->
-        <form ng-show="isSet(1) && loggedInUserRole != 'Student'" name="form">
-            <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here"></textarea>
+        <form ng-show="loggedInUserRole != 'Student'" name="form">
+            <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here" ng-required="true"></textarea>
             
             <div class="btn btn-default btn-file" ngf-select ng-model="file" name="file"
                 ngf-max-size="'20MB'" ngf-min-height="100" 
-                ngf-resize="{width: 100, height: 100}">Select</div>
-            <button type="submit" class="btn btn-primary" ng-click="submit()">submit</button>
+                ngf-resize="{width: 100, height: 100}">Upload...</div>
+                {{ file.name }}
+            <button type="submit" class="btn btn-primary" ng-click="submit()">Post</button>
         </form>
-          
-          <!--Upload right away after file selection:-->
-          <!--<div class="button" ngf-select="upload($file)">Upload on file select</div>-->
-        
-        <!-- post assignment -->
-        <form ng-show="isSet(2) && loggedInUserRole != 'Student'">
-            <input type="text" class="form-control" ng-model="todo" placeholder="Assignment title">
-            
-            <textarea class="form-control" rows="3" placeholder="Assignment description"></textarea>
-            <label class="checkbox-inline"><input type="checkbox" value="">Disable after due date</label>
-            <span class="btn btn-default btn-file">
-                Browse <input type="file" onchange='$("#upload-file-section-assignment").html($(this).val());'>
-            </span>
-            <span id="upload-file-section-assignment"></span>
-            <input type="submit" class="btn btn-primary" value="Post">
-        </form>
-        
     </div>
     
     <!-- posts in feed -->
@@ -70,7 +27,16 @@
             <span class="glyphicon glyphicon-file"></span>{{ post.file }}
         </a>
         <hr>
-        <span ><a href><span class="glyphicon glyphicon-comment"></span> Respond</a></span>
+        <div ng-repeat="comment in post.comments | orderBy: 'responseDate' : true" class="post img-rounded">
+            <b>{{ comment.commenter }}</b>{{ comment.responseDate | date: 'EEE MMM d, yyyy h:mm a' }}
+            <br>
+            <p>{{ comment.message }}</p>
+            <br>
+        </div>
+        <a href ng-click="showCommentField(post.id)" ng-hide="post.showCommentField"><span class="glyphicon glyphicon-comment"></span> Comment...</a>
+        <form ng-submit="postComment(post.id)">
+            <input type="text" class="form-control" ng-model="post.commentTextField" placeholder="Write a comment..." ng-show="post.showCommentField">
+        </form>
     </div>
     
 </div>

@@ -20,19 +20,28 @@ module.exports = {
       type: 'string'
     },
     
-    postDate : {
+    responseDate : {
       type: 'datetime',
       columnName: 'post_date'
     },
-    
-    senderRole: {
-      type: 'string',
-      columnName: 'sender_role'
+
+    commenter: {
+      type: 'string'
     },
     
-    senderId: {
+    commenterId: {
       type: 'integer',
-      columnName: 'sender_id'
+      columnName: 'commenter_id'
+    },
+
+    postId: {
+      type: 'integer',
+      columnName: 'post_id',
+      model: 'Post'
+    },
+
+    post: {
+      model: 'Post'
     }
   }
 };

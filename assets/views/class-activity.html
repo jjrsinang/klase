@@ -8,12 +8,25 @@
     
     <div class="post img-rounded">
         <span><h4>{{ activitySelected.title }}</h4></span>
-        <br />
         <span><b>{{ activitySelected.message }}</b></span>
         <br />
-        <span>{{ activitySelected.schedule | date: 'MMM d, yyyy' }}</span>
-        
-        
+        <span>Posted: {{ activitySelected.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span> <br>
+        <span>Due: {{ activitySelected.dueDate | date: 'EEE MMM d, yyyy h:mm a'  }}</span>
+    </div>
+
+    <div ng-repeat="submission in assignmentSubmissions | orderBy: 'postDate' : true" class="post img-rounded">
+        <span class="poster-name" ><a href>{{ submission.student.fName + ' ' + submission.student.lName }}</a></span><br>
+        <span class="post-timestamp" >{{ submission.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span><br>
+        <h5>{{ submission.title }}</h5>
+        <p>{{ submission.message }}</p><br>
+        <a href="{{ origin + '/images/' + submission.filename }}" target="_blank" class="btn btn-primary" ng-hide="{{ submission.filename.length == 0 || submission.filename == null }}">
+            <span class="glyphicon glyphicon-file"></span>{{ submission.file }}
+        </a>
+
+        <form name="gradeAssignmentForm">
+            <input type="number" ng-model="submission.score" ng-required="true" /> / {{ activitySelected.mark }}
+            <button type="submit" class="btn btn-primary btn-sm" ng-click="submitGrade(submission.id, submission.score)">Grade</button>
+        </form>
     </div>
     
 </div>

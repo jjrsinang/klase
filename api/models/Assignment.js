@@ -15,6 +15,10 @@ module.exports = {
       type: 'integer',
       primaryKey: true
     },
+
+    title: {
+      type: 'string'
+    },
     
     message : {
       type: 'string'
@@ -23,10 +27,23 @@ module.exports = {
     mark : {
       type: 'integer'
     },
+
+    file: {
+      type: 'string'
+    },
+
+    filename: {
+      type: 'string'
+    },
     
     postDate : {
       type: 'datetime',
       columnName: 'post_date'
+    },
+
+    dueDate : {
+      type: 'datetime',
+      columnName: 'due_date'
     },
     
     sectionId: {
@@ -37,6 +54,10 @@ module.exports = {
     posterId: {
       type: 'integer',
       columnName: 'poster_id'
+    },
+
+    poster: {
+      model: 'User'
     }
   }
 };
