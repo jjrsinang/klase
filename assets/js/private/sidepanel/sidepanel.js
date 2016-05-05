@@ -42,6 +42,9 @@ angular.module('klaseApp')
 	  })
 	  .then(function onSuccess(sailsResponse){
 		  $scope.events = sailsResponse.data;
+		  for (var i = 0; i < $scope.events.length; i++) {
+		  	$scope.events[i].daysLeft = daydiff(new Date(), new Date($scope.events[i].schedule));
+		  };
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
@@ -56,10 +59,31 @@ angular.module('klaseApp')
 	$scope.displaySelectedSection = function (index) {
 	  $scope.$emit('requestShowClass', $scope.sections[index]);
 	};
+
+	/* **************************************************************
+	 * display selected event
+	 * **************************************************************/
+	$scope.displaySelectedEvent = function (index) {
+	  $scope.$emit('requestShowEvent', $scope.events[index]);
+	};
+
+	/* **************************************************************
+	 * display calendar
+	 * **************************************************************/
+	$scope.displayCalendar = function (index) {
+	  $scope.$emit('requestShowCalendar');
+	};
     
 	// call functions
     getSections();
 	getEvents();
+
+	/* **************************************************************
+	 * ulits
+	 * **************************************************************/
+	var daydiff = function(first, second) {
+	    return Math.round((second-first)/(1000*60*60*24));
+	}
     
   }]);
 })();

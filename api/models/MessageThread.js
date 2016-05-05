@@ -18,6 +18,29 @@ module.exports = {
     
     seen : {
       type: 'int'
+    },
+
+    participant1Id : {
+      type: 'int',
+      columnName: 'participant1_id'
+    },
+
+    participant1 : {
+      model: 'User'
+    },
+
+    participant2Id : {
+      type: 'int',
+      columnName: 'participant2_id'
+    },
+
+    participant2 : {
+      model: 'User'
+    },
+
+    lastActivity : {
+      type: 'datetime',
+      columnName: 'last_activity'
     }
   }
 };

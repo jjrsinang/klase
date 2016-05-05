@@ -35,6 +35,10 @@ module.exports = {
     sectionId: {
       type: 'integer',
       columnName: 'section_id'
+    },
+
+    section: {
+      model: 'Section'
     }
   }
 };

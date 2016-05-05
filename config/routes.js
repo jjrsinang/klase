@@ -49,22 +49,48 @@ module.exports.routes = {
   //'GET /loginpage': {view: 'loginpage'},
   'PUT /login': 'UserController.login',
   'GET /logout': 'UserController.logout',
+  'PUT /membersbysection': 'UserController.getUsersBySection',
+  'GET /user/search?:qry': 'UserController.searchUsers',
   
   // Section
   'PUT /section': 'SectionController.getSectionsByUser',
   'GET /allsections': 'SectionController.getAllSections',
+  
+  // event
   'PUT /event': 'EventController.getEventsByUser',
+  'POST /createevent': 'EventController.createEvent',
+  
+  // activities/assignment
+  'PUT /sectionassignments': 'AssignmentController.getAssignmentsForSection',
+  'POST /file/uploadassignment': 'AssignmentController.postAssignmentWithUpload',
+  'POST /postassignment': 'AssignmentController.postAssignment',
+  'PUT /deleteassignment': 'AssignmentController.deleteAssignment',
+  'POST /postassignmentsubmission': 'AssignmentController.postAssignmentSubmission',
+  'POST /file/uploadassignmentsubmission': 'AssignmentController.postAssignmentSubmissionWithUpload',
+  'PUT /submission': 'AssignmentController.getSubmission',
+  'PUT /deletesubmission': 'AssignmentController.deleteSubmission',
+  'PUT /submissions': 'AssignmentController.getSubmissions',
+  'PUT /submitgrade': 'AssignmentController.gradeSubmission',
   
   // posts
   'PUT /posts': 'PostController.getPostsForUser',
   'PUT /sectionposts': 'PostController.getPostsForSection',
-  'POST /file/upload': 'PostController.postToSection',
+  'POST /file/upload': 'PostController.postWithUpload',
   'POST /post': 'PostController.post',
-  'DELETE /post': 'PostController.deletePost',
+  'PUT /deletepost': 'PostController.deletePost',
+  'POST /postcomment': 'PostController.createComment',
+  'GET /post/:id': 'PostController.getPost',
   
   // chat
   'PUT /chat/getconv': 'ChatController.getConvForUsers',
-  'GET /chat/getthread': 'ChatController.getThreadsForUser',
+  'PUT /chat/getthread': 'ChatController.getThreadsForUser',
+
+  // classmaster
+  'GET /teachers': 'UserController.getTeachers',
+  'PUT /addstudent': 'SectionController.addStudentToSection',
+  'PUT /removestudent': 'SectionController.removeStudentFromSection',
+  'PUT /changeteacher': 'SectionController.changeSectionTeacher',
+  'PUT /addsection': 'SectionController.addSection',
   
 
   // '/': {

@@ -21,10 +21,12 @@ angular
     'LocalStorageModule',
     'ui-elements',
     'ui.calendar',
+    'ui.bootstrap',
     'toastr',
     'compareTo',
     'ngFileUpload',
-    'ngDialog'
+    'ngDialog',
+    'angucomplete-alt'
   ])
   
   .config(['localStorageServiceProvider', function(localStorageServiceProvider){

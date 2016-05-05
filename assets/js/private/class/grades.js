@@ -59,35 +59,43 @@ angular.module('klaseApp')
               studentId: $scope.students[num].id
             })
             .then(function onSuccess(sailsResponse3){
-              if (sailsResponse3.data && sailsResponse3.data.length > 0 && sailsResponse3.data[0].student.id == 1) {
+              if (sailsResponse3.data && sailsResponse3.data.length > 0) {
+                // console.log('student id: '+sailsResponse3.data[0].student.id);
                 var assignments = sailsResponse3.data;
+                
+                var tempAssignments = [];
+                for (var i = 0; i < assignmentIds.length; i++) {
+                  tempAssignments.push({assignmentId:assignmentIds[i],score:0});
+                };
+
                 for (var i = 0; i < $scope.students.length; i++) {
-
-                  if ($scope.students[i].id == assignments[0].student.id) {
-                    for (var j = 0; j < $scope.students[i].assignments.length; j++) {
-                      for (var k = 0; k < assignments.length; k++) {
-
-                        console.log('assid '+$scope.students[i].assignments[j].assignmentId + ' == ' +assignments[k].assignmentId);
-                        console.log('studid '+$scope.students[i].id +' == ' +assignments[k].student.id);
-                        if ($scope.students[i].assignments[j].assignmentId == assignments[k].assignmentId &&
-                            $scope.students[i].id == assignments[k].student.id) {
-                          console.log($scope.students[i].assignments[j].score);
-                          console.log(assignments[k].score);
-                          $scope.students[i].assignments[j].score = assignments[k].score;
-                        }
-                      };
+                  for (var j = 0; j < tempAssignments.length; j++) {
+                    for (var k = 0; k < assignments.length; k++) {
+                      // console.log('assid '+tempAssignments[j].assignmentId + ' == ' +assignments[k].assignmentId);
+                      // console.log('studid '+$scope.students[i].id +' == ' +assignments[k].student.id);
+                      if (tempAssignments[j].assignmentId == assignments[k].assignmentId &&
+                          $scope.students[i].id == assignments[k].student.id &&
+                          $scope.students[i].id == sailsResponse3.data[0].student.id) {
+                        // console.log(tempAssignments[j].score);
+                        // console.log(assignments[k].score);
+                        tempAssignments[j].score = assignments[k].score;
+                      }
                     };
-                    $scope.students[i].total = 0;
-                    for (var j = 0; j < $scope.students[i].assignments.length; j++) {
-                      $scope.students[i].total += $scope.students[i].assignments[j].score;
-                    };
-                  } else {
-                    continue;
+                  };
+
+                  if ($scope.students[i].id == sailsResponse3.data[0].student.id) {
+                    // console.log(tempAssignments);
+                    $scope.students[i].assignments = tempAssignments;
                   }
+
+                  $scope.students[i].total = 0;
+                  for (var j = 0; j < $scope.students[i].assignments.length; j++) {
+                    $scope.students[i].total += $scope.students[i].assignments[j].score;
+                  };
                 }
 
-                console.log('students:');
-                console.log($scope.students);
+                // console.log('students:');
+                // console.log($scope.students);
               }
 
               return;

@@ -28,6 +28,11 @@ module.exports = {
     seen : {
       type: 'int'
     },
+
+    threadId: {
+      type: 'int',
+      columnName: 'thread_id'
+    },
     
     sender : {
       model : 'User'

@@ -15,9 +15,11 @@ angular.module('klaseApp')
     $scope.sidePanel = 0;
     $scope.showClass = false;
     $scope.showProfile = false;
+    $scope.showCalendar = false;
     $scope.origin = window.location.origin;
     $scope.role = $cookies.get('role');
-    
+    $scope.isConnected = false;
+
     $scope.loggedIn = false;
     $scope.login = {
       loading: false,
@@ -28,6 +30,88 @@ angular.module('klaseApp')
     // cookies
     $scope.firstname = $cookies.get('firstname') || 'Profile';
     
+
+    /* **************************************************************
+     * Socket Subscription
+     * **************************************************************/
+     var subscribe = function () {
+        // Announce that a new user is online--in this somewhat contrived example,
+        // this also causes the CREATION of the user, so each window/tab is a new user.
+        io.socket.get("/user/announce", {id: $cookies.get('id')}, function(data){
+
+          // Get the current list of users online.  This will also subscribe us to
+          // update and destroy events for the individual users.
+          //io.socket.get('/user', updateUserList);
+
+          // Get the current list of chat rooms. This will also subscribe us to
+          // update and destroy events for the individual rooms.
+          //io.socket.get('/room', updateRoomList);
+
+        });
+
+
+        // Listen for the "user" event, which will be broadcast when something
+        // happens to a user we're subscribed to.  See the "autosubscribe" attribute
+        // of the User model to see which messages will be broadcast by default
+        // to subscribed sockets.
+        io.socket.on('user', function messageReceived(message) {
+
+          switch (message.verb) {
+
+            // Handle user creation
+            case 'created':
+              // addUser(message.data);
+              break;
+
+            // Handle a user changing their name
+            case 'updated':
+
+              // // Get the user's old name by finding the <option> in the list with their ID
+              // // and getting its text.
+              // var oldName = $('#user-'+message.id).text();
+
+              // // Update the name in the user select list
+              // $('#user-'+message.id).text(message.data.name);
+
+              // // If we have a private convo with them, update the name there and post a status message in the chat.
+              // if ($('#private-username-'+message.id).length) {
+              //   $('#private-username-'+message.id).html(message.data.name);
+              //   postStatusMessage('private-messages-'+message.id,oldName+' has changed their name to '+message.data.name);
+              // }
+
+              break;
+
+            // Handle user destruction
+            case 'destroyed':
+              // removeUser(message.id);
+              break;
+
+            // Handle private messages.  Only sockets subscribed to the "message" context of a
+            // User instance will get this message--see the onConnect logic in config/sockets.js
+            // to see where a new user gets subscribed to their own "message" context
+            case 'messaged':
+              receivePrivateMessage(message.data);
+              break;
+
+            default:
+              break;
+          }
+
+        });
+
+        console.log('Socket is now connected!');
+        $scope.isConnected = true;
+
+        // When the socket disconnects, hide the UI until we reconnect.
+        io.socket.on('disconnect', function() {
+          // Hide the chat UI
+          $scope.isConnected = false;
+        });
+     };
+
+    /* **************************************************************
+     * Auth
+     * **************************************************************/
     var isLoggedIn = function () {
       console.log('GET /auth');
       // Submit request to Sails.
@@ -38,6 +122,7 @@ angular.module('klaseApp')
         //    closeButton: true
         //});
         $scope.loggedIn = sailsResponse.data;
+        // subscribe();
       })
       .catch(function onError(sailsResponse) {
         console.log('error');
@@ -70,14 +155,12 @@ angular.module('klaseApp')
         $cookies.put('role', sailsResponse.data.role);
         $cookies.put('id', sailsResponse.data.id);
         $cookies.put('birthday', sailsResponse.data.birthday);
-        
         $cookies.put('course', sailsResponse.data.course);
         $cookies.put('college', sailsResponse.data.college);
         $cookies.put('studentno', sailsResponse.data.studentNo);
-        
         $cookies.put('employeeno', sailsResponse.data.employeeNo);
         $cookies.put('rank', sailsResponse.data.rank);
-        
+
         window.location = '/';
       })
       .catch(function onError(sailsResponse) {
@@ -138,56 +221,106 @@ angular.module('klaseApp')
      * show class event
      * **************************************************************/
     $scope.$on('requestShowClass', function(e, section){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.$broadcast('showClass', section);
+      $scope.$broadcast('hideEvent');
+    });
+
+    /* **************************************************************
+     * show event event
+     * **************************************************************/
+    $scope.$on('requestShowEvent', function(e, event){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
+      $scope.showClass = false;
+      $scope.showEvent = true;
+      $scope.$broadcast('showEvent', event);
+    });
+
+    /* **************************************************************
+     * show calendar event
+     * **************************************************************/
+    $scope.$on('requestShowCalendar', function(e){
+      $scope.showCalendar = true;
+      $scope.showProfile = false;
+      $scope.showClass = false;
+      $scope.showEvent = false;
+      $scope.$broadcast('showCalendar');
+      $scope.$broadcast('hideEvent');
     });
     
     /* **************************************************************
      * get class activities event
      * **************************************************************/
     $scope.$on('getClassActivities', function(e, section){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.$broadcast('classActivities', section);
+      $scope.$broadcast('hideEvent');
     });
     
     /* **************************************************************
      * get class posts event
      * **************************************************************/
     $scope.$on('getClassPosts', function(e, section){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.$broadcast('classPosts', section);
+      $scope.$broadcast('hideEvent');
     });
 
     /* **************************************************************
      * get class grades event
      * **************************************************************/
     $scope.$on('getClassGrades', function(e, section){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.$broadcast('classGrades', section);
+      $scope.$broadcast('hideEvent');
     });
 
     /* **************************************************************
      * get class members event
      * **************************************************************/
     $scope.$on('requestClassMembers', function(e, section){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.$broadcast('getClassMembers', section);
+      $scope.$broadcast('hideEvent');
     });
     
     /* **************************************************************
      * show profile event
      * **************************************************************/
     $scope.$on('requestShowProfile', function(e, poster){
+      $scope.showCalendar = false;
       $scope.showProfile = true;
-      $scope.setTab(7);
+      $scope.showClass = false;
+      $scope.showEvent = false;
+      // $scope.setTab(99);
       $scope.$broadcast('showProfile', poster);
+      $scope.$broadcast('hideEvent');
     });
     
     /* **************************************************************
      * set tab event
      * **************************************************************/
     $scope.$on('requestSetTab', function(e, index){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
       $scope.showClass = true;
+      $scope.showEvent = false;
       $scope.setTab(index);
     });
     
@@ -203,6 +336,11 @@ angular.module('klaseApp')
       
       if ($scope.tab == 2) {
         $scope.$broadcast('showLoggedInProfile');
+      }
+
+      if ($scope.tab <= 4) {
+        $scope.showCalendar = false;
+        $scope.$broadcast('hideEvent');
       }
     };
     
