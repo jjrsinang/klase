@@ -43,9 +43,9 @@ module.exports.connections = {
   
   mysql : {
     adapter: 'sails-mysql',
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
+    host: 'us-cdbr-iron-east-04.cleardb.net',
+    user: 'bdf1b42fb86eb7',
+    password: 'bdf1b42fb86eb7',
     database: 'klasedb'
   },
   
