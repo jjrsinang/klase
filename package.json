@@ -28,7 +28,7 @@
     "sails-mysql": "^0.12.1"
   },
   "scripts": {
-    "debug": "node debug app.js",
+    "debug": "sails lift",
     "start": "node app.js"
   },
   "main": "app.js",
