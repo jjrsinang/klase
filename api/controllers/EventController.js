@@ -9,20 +9,40 @@ module.exports = {
     
     /**********************************************************/
     getEventsByUser: function (req, res) {
-        Event
+
+        UserSection
         .find()
         .where({
-            sectionId: req.param('sectionId')
+            userId: req.param('userId')
         })
-        .populateAll()
-        .exec(function foundSections(err, events) {
+        .exec(function foundSections(err, sections) {
             if (err) return res.negotiate(err);
-            if (!events) return res.notFound();
+            if (!sections) return res.notFound();
+            //sails.log.debug(sections);
             
-            sails.log.info('getEventsByUser: ');
-            sails.log.debug(events);
+            var sectionIds = new Array();
+            for (i = 0; i < sections.length; i++) {
+                sectionIds.push(sections[i].sectionId);
+            }
+            //sails.log.debug(sectionIds);
             
-            return res.ok(events);
+            Event
+            .find()
+            .where({
+                sectionId: sectionIds
+            })
+            .populateAll()
+            .exec(function foundEvents(err, events) {
+                if (err) return res.negotiate(err);
+                if (!events) return res.notFound();
+                
+                sails.log.info('getEventsByUser: ');
+                //sails.log.debug(events);
+                
+                return res.ok(events);
+            });
+            
+            //return res.ok();
         });
     },
 

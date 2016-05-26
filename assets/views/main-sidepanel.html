@@ -23,12 +23,23 @@
             <span class="glyphicon glyphicon-calendar"></span> Upcoming Events
          </li>
          
-         <li ng-repeat="event in events" ng-class="{ active:isSet($index + sections.length + 5) }">
-            <a href ng-click="setTab( {{ $index + sections.length + 5 }} )">
-               {{ event.title + " " + "(N days left)" }}
+         <li ng-repeat="event in upcomingEvents" ng-class="{ active:isSet($index + sections.length + 5) }">
+            <a href ng-click="setTab($index + sections.length + 5); displaySelectedEvent($index)">
+               {{ event.title + " " + "(" + event.label + ")" }} <br>
+            </a>
+         </li>
+
+         <li ng-show="upcomingEvents.length == 0">
+          no events to show
+          </li>
+
+         <li>
+            <a href ng-click="setTab( {{ upcomingEvents.length + sections.length + 6 }} ); displayCalendar()" >
+              <span class="glyphicon glyphicon-calendar"></span> Show Calendar
             </a>
          </li>
       </ul>
+
    </div>
    
 </div>

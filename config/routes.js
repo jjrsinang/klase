@@ -36,7 +36,7 @@ module.exports.routes = {
   // Server-rendered HTML webpages
   ////////////////////////////////////////////////////////////
 
-  'GET /signup': {view: 'signup'},
+  // 'GET /signup': {view: 'signup'},
   'GET /auth': 'PageController.auth',
   'GET /': 'PageController.showHomePage',
 
@@ -80,6 +80,7 @@ module.exports.routes = {
   'PUT /deletepost': 'PostController.deletePost',
   'POST /postcomment': 'PostController.createComment',
   'GET /post/:id': 'PostController.getPost',
+  'PUT /deletecomment': 'PostController.deleteComment',
   
   // chat
   'PUT /chat/getconv': 'ChatController.getConvForUsers',

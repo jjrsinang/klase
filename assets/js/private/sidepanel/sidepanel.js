@@ -12,6 +12,7 @@ angular.module('klaseApp')
   .controller('SidepanelCtrl', ['$scope', '$http', 'toastr', '$cookies', function ($scope, $http, toastr, $cookies) {
     $scope.sections = [];
 	$scope.events = [];
+	$scope.upcomingEvents = [];
 	$scope.loggedInUserId = $cookies.get('id');
     
 	/* **************************************************************
@@ -36,14 +37,31 @@ angular.module('klaseApp')
 	 * Fetch events
 	 * **************************************************************/
 	var getEvents = function () {
-	  console.log('GET /event');
-	  $http.get('/event', {
-		  
+	  console.log('PUT /event');
+	  $http.put('/event', {
+		  userId: $scope.loggedInUserId
 	  })
 	  .then(function onSuccess(sailsResponse){
 		  $scope.events = sailsResponse.data;
+		  // compute days left
+		  var curDate = new Date();
 		  for (var i = 0; i < $scope.events.length; i++) {
-		  	$scope.events[i].daysLeft = daydiff(new Date(), new Date($scope.events[i].schedule));
+		  	$scope.events[i].timeLeftStart = mindiff(curDate, new Date($scope.events[i].schedule));
+		  	$scope.events[i].timeLeftEnd = mindiff(curDate, new Date($scope.events[i].deadline));
+		  	
+		  	if ($scope.events[i].timeLeftStart > 0) {
+		  		if ($scope.events[i].timeLeftStart > 60*24) {
+		  			$scope.events[i].label = Math.round($scope.events[i].timeLeftStart / (60*24)) + ' days left';
+		  		} else if ($scope.events[i].timeLeftStart > 60) {
+		  			$scope.events[i].label = Math.round($scope.events[i].timeLeftStart / (60)) + ' hours left';
+		  		} else {
+		  			$scope.events[i].label = Math.round($scope.events[i].timeLeftStart) + ' minutes left';
+		  		}
+		  		$scope.upcomingEvents.push($scope.events[i]);
+		  	} else if ($scope.events[i].timeLeftEnd > 0) {
+		  		$scope.events[i].label = 'in progess';
+		  		$scope.upcomingEvents.push($scope.events[i]);
+		  	}
 		  };
 		  return;
 	  })
@@ -81,8 +99,8 @@ angular.module('klaseApp')
 	/* **************************************************************
 	 * ulits
 	 * **************************************************************/
-	var daydiff = function(first, second) {
-	    return Math.round((second-first)/(1000*60*60*24));
+	var mindiff = function(first, second) {
+	    return Math.round((second-first)/(1000*60));
 	}
     
   }]);

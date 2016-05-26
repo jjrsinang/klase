@@ -9,7 +9,7 @@
  * Controller of the klaseApp
  */
 angular.module('klaseApp')
-  .controller('FeedCtrl', ['$scope', '$http', 'toastr', '$cookies', 'Upload', function ($scope, $http, toastr, $cookies, Upload) {
+  .controller('FeedCtrl', ['$scope', '$http', 'toastr', '$cookies', 'Upload', 'ngDialog', function ($scope, $http, toastr, $cookies, Upload, ngDialog) {
     
     $scope.posts = [];
     $scope.tab = 1;
@@ -17,6 +17,7 @@ angular.module('klaseApp')
     $scope.selectedSection = null;
 	$scope.loggedInUserId = $cookies.get('id');
     $scope.loggedInUserRole = $cookies.get('role');
+    $scope.loggedInUserName = $cookies.get('firstname') + ' ' + $cookies.get('lastname');
     $scope.file = null;
     
     /* **************************************************************
@@ -73,6 +74,14 @@ angular.module('klaseApp')
 		}
     };
 
+    $scope.showComments = function(postId) {
+    	for (var i = 0; i < $scope.posts.length; i++) {
+    		if ($scope.posts[i].id == postId) {
+    			$scope.posts[i].showComments = true;
+    		}
+		}
+    };
+
     var fetchFreshPost = function (postId) {
     	console.log('GET /post/'+postId);
     	$http.get('/post/'+postId)
@@ -101,6 +110,7 @@ angular.module('klaseApp')
 		})
 		.then(function onSuccess(sailsResponse){
 			fetchFreshPost(postId);
+			toastr.success('Success.', 'Success ' + sailsResponse.status);
 			return;
 		})
 		.catch(function onError(sailsResponse){
@@ -116,6 +126,23 @@ angular.module('klaseApp')
     		}
 		}
     };
+
+    $scope.deleteComment = function (commentId) {
+		console.log('PUT /deletecomment');
+    	$http.put('/deletecomment', {
+			id: commentId
+		})
+		.then(function onSuccess(sailsResponse){
+			fetchFreshPost(postId);
+			toastr.success('Success.', 'Success ' + sailsResponse.status);
+			return;
+		})
+		.catch(function onError(sailsResponse){
+			toastr.error('Error :(.', 'Error ' + sailsResponse.status);
+			return;
+		});
+    };
+
     
     /* **************************************************************
      * post
@@ -131,6 +158,7 @@ angular.module('klaseApp')
 	  .then(function onSuccess(sailsResponse){
 	  	  clearPostFields();
 		  getPosts();
+		  toastr.success('Success.', 'Success ' + sailsResponse.status);
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
@@ -157,6 +185,7 @@ angular.module('klaseApp')
 			console.log(resp.data);
 			clearPostFields();
 			getPosts();
+			toastr.success('Success.', 'Success ' + sailsResponse.status);
         }, function (resp) {
             console.log('Error status: ' + resp.status);
             toastr.error('Error :(.', resp.status);
@@ -180,6 +209,7 @@ angular.module('klaseApp')
     var clearPostFields = function() {
 		$scope.message = null;
        	$scope.selectedSection = null;
+       	$scope.form.$setPristine();
 	};
     
     /* **************************************************************
@@ -193,6 +223,7 @@ angular.module('klaseApp')
 	  })
 	  .then(function onSuccess(sailsResponse){
 		  getPosts();
+		  toastr.success('Success.', 'Success ' + sailsResponse.status);
 		  return;
 	  })
 	  .catch(function onError(sailsResponse){
@@ -213,7 +244,39 @@ angular.module('klaseApp')
 	 * view profile
 	 * **************************************************************/
 	$scope.displayProfile = function (poster) {
-      $scope.$emit('requestShowProfile', poster);
+		var bday = new Date(poster.birthday);
+		var month = new Array();
+			month[0] = "January";
+			month[1] = "February";
+			month[2] = "March";
+			month[3] = "April";
+			month[4] = "May";
+			month[5] = "June";
+			month[6] = "July";
+			month[7] = "August";
+			month[8] = "September";
+			month[9] = "October";
+			month[10] = "November";
+			month[11] = "December";
+		var str = '<div class="post img-rounded">'+
+			        '<img class="avatar" ng-src="images/yeoman.png" />'+
+			        '<span><b>'+poster.fName+' '+poster.mName+' ' +poster.lName+'</b></span>'+
+			        '<br />'+
+			        '<span>'+ (poster.studentNo ? poster.studentNo : poster.employeeNo) +'</span>'+
+			        '<br />'+
+			        '<span>'+(poster.course ? poster.course : poster.rank) +'</span>'+
+			        '<br />'+
+			        '<span>'+ (poster.college ? poster.college : "-") +'</span>'+
+			        '<br />'+
+			        '<span>'+ month[bday.getMonth()] +' ' + bday.getDate() + ', '+ bday.getFullYear() +'</span>'+
+			    '</div>';
+		
+		var dialog = ngDialog.open({
+	       template: str,
+	         plain: true
+	      });
+
+      // $scope.$emit('requestShowProfile', poster);
 	  //$scope.$emit('requestShowClass', section);
 	};
     

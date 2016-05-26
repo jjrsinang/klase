@@ -13,7 +13,7 @@
             
             <textarea ng-model="assignment.message" class="form-control" rows="3" placeholder="Assignment description" ng-required="true"></textarea>
             <input type="number" class="form-control" ng-model="assignment.mark" placeholder="max score" ng-required="true" min="1">
-            <input type="datetime-local" class="form-control" ng-model="assignment.dueDate" placeholder="due date" ng-required="true">
+            Due date:  <input type="datetime-local" class="form-control" ng-model="assignment.dueDate" placeholder="due date (yyyy-MM-dd)" ng-required="true">
             <br>
             <div class="btn btn-default btn-file" ngf-select ng-model="assignment.file" name="file"
                 ngf-max-size="'20MB'" ngf-min-height="100" 

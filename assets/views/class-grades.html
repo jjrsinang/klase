@@ -6,7 +6,7 @@
     <thead>
       <tr>
         <th>Student #</th>
-        <th>Name</th>
+        <th ng-show="loggedInUserRole == 'Teacher'">Name</th>
         <th ng-repeat="activity in activities">{{ activity.title + " (" + activity.mark + ")" }}</th>
         <th>Total ({{ total }})</th>
       </tr>
@@ -15,7 +15,7 @@
     <tbody>
       <tr ng-repeat="student in students">
         <td>{{ student.studentNo }}</td>
-        <td>{{ student.fName + ' ' + student.lName }}</td>
+        <td ng-show="loggedInUserRole == 'Teacher'">{{ student.fName + ' ' + student.lName }}</td>
         <td ng-repeat="assignment in student.assignments">{{ assignment.score }}</td>
         <td>{{ student.total }}</td>
       </tr>

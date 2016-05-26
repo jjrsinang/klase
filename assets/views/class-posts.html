@@ -2,7 +2,7 @@
     
     <!-- post material/announcement -->
     <div class="post-input img-rounded">
-        <form ng-show="loggedInUserRole != 'Student'" name="form">
+        <form name="form">
             <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here" ng-required="true"></textarea>
             
             <div class="btn btn-default btn-file" ngf-select ng-model="file" name="file"
@@ -16,8 +16,8 @@
     <!-- posts in feed -->
     <div ng-repeat="post in posts | orderBy: 'postDate' : true" class="post img-rounded">
         <img class="small-avatar" ng-src="images/yeoman.png" />
-        <span class="poster-name" ><a href>{{ post.poster.fName + " " + post.poster.lName }}</a></span>
-        <a href="" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId == post.poster.id">Delete</a>
+        <span class="poster-name" ng-click="displayProfile(post.poster)"><a href>{{ post.poster.fName + " " + post.poster.lName }}</a></span>
+        <a href="" class="delete" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId==post.poster.id || loggedInUserRole == 'Teacher'">Delete</a>
         <br />
         <span class="post-timestamp" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
         <br />
@@ -27,13 +27,15 @@
             <span class="glyphicon glyphicon-file"></span>{{ post.file }}
         </a>
         <hr>
-        <div ng-repeat="comment in post.comments | orderBy: 'responseDate' : true" class="post img-rounded">
+        <div ng-repeat="comment in post.comments | orderBy: id : true" style="font-size:0.8em;" ng-show="post.showComments">
             <b>{{ comment.commenter }}</b>{{ comment.responseDate | date: 'EEE MMM d, yyyy h:mm a' }}
+            <a href="" class="delete" style="color: red; float: right;" ng-click="deleteComment(comment.id)" ng-show="loggedInUserName==comment.commenter || loggedInUserRole == 'Teacher'">Delete</a>
             <br>
             <p>{{ comment.message }}</p>
             <br>
         </div>
         <a href ng-click="showCommentField(post.id)" ng-hide="post.showCommentField"><span class="glyphicon glyphicon-comment"></span> Comment...</a>
+        <a href style="float: right;" ng-click="showComments(post.id)" ng-show="!post.showComments && post.comments.length >= 1">Show {{post.comments.length}} comments</a>
         <form ng-submit="postComment(post.id)">
             <input type="text" class="form-control" ng-model="post.commentTextField" placeholder="Write a comment..." ng-show="post.showCommentField">
         </form>

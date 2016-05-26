@@ -1,18 +1,19 @@
 <div ng-controller="FeedCtrl as feed" class="feed-container">
     <div class="post-input img-rounded">
         
-        <!-- tabs -->
+        <!-- tabs 
         <ul class="nav nav-tabs" ng-hide="loggedInUserRole == 'Student'">
             <li ng-class="{ active:isSet(1) }">
               <a href ng-click="setTab(1)">Post</a>
             </li>
             <li ng-class="{ active:isSet(2) }">
-              <a href ng-click="setTab(2)">Activity</a>
+              <a href ng-click="setTab(2)">Assignment</a>
             </li>
           </ul>
+          -->
         
         <!-- post note -->
-        <form ng-show="isSet(1) && loggedInUserRole != 'Student'" name="form">
+        <form ng-show="isSet(1)" name="form">
             <textarea ng-model="message" name="message" class="form-control" rows="3" placeholder="Type your note here"></textarea>
             <select class="form-control" ng-model="selectedSection" ng-options="s.courseNumber+' '+s.sectionName for s in accessibleSections track by s.id" name="sectionId" >
                 <option value="">-- select section --</option>
@@ -24,14 +25,13 @@
             <button type="submit" class="btn btn-primary" ng-click="submit()">submit</button>
         </form>
         
-        <!-- post assignment -->
+        <!-- post assignment 
         <form ng-show="isSet(2) && loggedInUserRole != 'Student'">
             <input type="text" class="form-control" ng-model="todo" placeholder="Assignment title">
             
             <textarea class="form-control" rows="3" placeholder="Assignment description"></textarea>
-            <label class="checkbox-inline"><input type="checkbox" value="">Disable after due date</label>
-            <select class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars">
-                <option value>Send to...</option>
+            <select class="form-control" ng-model="selectedSection" ng-options="s.courseNumber+' '+s.sectionName for s in accessibleSections track by s.id" name="sectionId" >
+                <option value="">-- select section --</option>
             </select>
             <span class="btn btn-default btn-file">
                 Browse <input type="file" onchange='$("#upload-file-feed-activity").html($(this).val());'>
@@ -39,6 +39,7 @@
             <span id="upload-file-feed-activity"></span>
             <input type="submit" class="btn btn-primary" value="Post">
         </form>
+        -->
         
     </div>
     
@@ -48,7 +49,7 @@
         <span class="poster-name" ng-click="displayProfile(post.poster)"><a href>{{ post.poster.fName + " " + post.poster.lName }}</a></span>
         <span > to </span>
         <span class="post-to" ng-click="displaySelectedSection(post.section)"><a href>{{ post.section.courseNumber + " " + post.section.sectionName }}</a></span>
-        <a href="" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId == post.poster.id">Delete</a>
+        <a href="" class="delete" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId == post.poster.id || loggedInUserRole == 'Teacher'">Delete</a>
         <br />
         <span class="post-timestamp" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
         <br />
@@ -58,15 +59,17 @@
             <span class="glyphicon glyphicon-file"></span>{{ post.file }}
         </a>
         <hr>
-        <div ng-repeat="comment in post.comments | orderBy: 'postDate' : true" class="post img-rounded">
-            <b>{{ comment.commenter }}</b>{{ comment.postDate | date: 'EEE MMM d, yyyy h:mm a' }}
+        <div ng-repeat="comment in post.comments | orderBy: id : true" style="font-size:0.8em;" ng-show="post.showComments">
+            <b>{{ comment.commenter }}</b>{{ comment.responseDate | date: 'EEE MMM d, yyyy h:mm a' }}
+            <a href="" class="delete"style="color: red; float: right;" ng-click="deleteComment(comment.id)" ng-show="loggedInUserName==comment.commenter || loggedInUserRole == 'Teacher'">Delete</a>
             <br>
             <p>{{ comment.message }}</p>
             <br>
         </div>
         <a href ng-click="showCommentField(post.id)" ng-hide="post.showCommentField"><span class="glyphicon glyphicon-comment"></span> Comment...</a>
+        <a href style="float: right;" ng-click="showComments(post.id)" ng-show="!post.showComments && post.comments.length >= 1">Show {{post.comments.length}} comments</a>
         <form ng-submit="postComment(post.id)">
-            <input type="text" class="form-control" ng-model="post.commentTextField" placeholder="Write a comment..." ng-show="post.showCommentField">
+            <input type="text" class="form-control" ng-model="post.commentTextField" placeholder="Write a comment... (press Enter to post)" ng-show="post.showCommentField">
         </form>
     </div>
     

@@ -128,6 +128,11 @@
 
   // upload later on form submit or something similar
   $scope.submitAssignment = function() {
+    if ($scope.assignment.dueDate < new Date()) {
+      toastr.info('Cannot select past dates','Invalid date');
+      return;
+    }
+
     if ($scope.assignmentForm.$valid && $scope.assignment.file) {
       // toastr.info('valid','');
       $scope.uploadAssignment($scope.assignment.file);
@@ -166,6 +171,7 @@
       mark: null,
       dueDate: null
     };
+    $scope.assignmentForm.$setPristine();
   };
 
     	// call functions

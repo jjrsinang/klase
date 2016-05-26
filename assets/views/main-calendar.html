@@ -1,1 +1,20 @@
-<!--<div ui-calendar ng-model="eventSources"></div>-->
+
+<div ng-controller="EventCtrl">
+
+	<div ng-show="!showEvent && showCalendar">
+		<button type="button" ng-click="addEvent()" ng-show="loggedInUserRole == 'Teacher'">Add event</button>
+		<!-- <button type="button" ng-click="refresh()" >Refresh</button> -->
+		<div id="calendar" ui-calendar="uiConfig.calendar" class="calendar" calendar="calendar" ng-model="eventSources"></div> 
+	</div>
+
+	<div class="profile-container" ng-show="showEvent && !showCalendar">
+		<div class="post img-rounded">
+			<h3>{{ selectedEvent.title }}</h3>
+			<p>{{ selectedEvent.message }}</p>
+			Start: {{ selectedEvent.schedule | date: 'EEE MMM d, yyyy h:mm a' }} <br>
+			End: {{ selectedEvent.deadline | date: 'EEE MMM d, yyyy h:mm a' }} <br>
+			Section: {{ selectedEvent.section.courseNumber + ' ' + selectedEvent.section.sectionName }}
+		</div>
+	</div>
+
+</div>

@@ -2,16 +2,21 @@
 
 <div ng-controller="MembersCtrl as membersCtrl" class="profile-container">
     
-    <a ng-repeat="member in members" href>
+    <div ng-show="loggedInUserRole == 'Teacher'" style="padding: 10px; margin: 10px;">
+        <button type="submit" class="btn btn-primary btn-sm" ng-click="addStudent()">Add student...</button>
+    </div>
+
+    <div ng-repeat="member in members">
         <div class="member img-rounded">
+            <a href="" class="delete" style="color: red; float: right;" ng-click="removeStudent(member)" ng-show="loggedInUserRole == 'Teacher'">Remove</a>
             <img class="small-avatar" ng-src="images/yeoman.png" />
             <span><b>{{ member.fName + ' ' + member.lName }}</b>
             <br>
-            {{ member.course }}
+            {{ member.studentNo }}
             <br>
-            {{ member.college }}
+            {{ member.course }}
             </span>
         </div>
-    </a>
+    </div>
     
 </div>

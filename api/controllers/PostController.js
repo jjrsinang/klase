@@ -66,7 +66,7 @@ module.exports = {
                 sectionId: sectionIds
             })
             .populateAll()
-            .exec(function foundSections(err, posts) {
+            .exec(function foundPosts(err, posts) {
                 if (err) return res.negotiate(err);
                 if (!posts) return res.notFound();
                 
@@ -193,6 +193,7 @@ module.exports = {
          });
     },
 
+    /**********************************************************/
     createComment: function (req, res) {
         sails.log.info('createComment: ');
 
@@ -220,5 +221,18 @@ module.exports = {
                 return res.ok(newResponse);
             });
         });
+    },
+
+    /**********************************************************/
+    deleteComment: function (req, res) {
+        sails.log.info('deleteComment: ' +req.param('id'));
+        PostResponse.destroy({
+            id: req.param('id')
+         }, function postDeleted(err, deleted) {
+             if (err) {
+                 return res.negotiate(err);
+             }
+             return res.ok(deleted);
+         });
     }
 };

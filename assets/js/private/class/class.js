@@ -12,6 +12,7 @@ angular.module('klaseApp')
   .controller('ClassCtrl', ['$scope', '$http', 'toastr',function ($scope, $http, toastr) {
     $scope.tab = 1;
     $scope.section = null;
+    $scope.members = [];
     
     /* **************************************************************
      * show class event
@@ -31,6 +32,10 @@ angular.module('klaseApp')
       else if ($scope.tab == 4) {
         $scope.$emit('requestClassMembers', $scope.section);
       }
+    });
+
+    $scope.$on('fetchedMembers',function(e, section, members){
+      $scope.members = members;
     });
     
     /* **************************************************************

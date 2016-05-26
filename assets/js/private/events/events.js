@@ -29,53 +29,10 @@ angular.module('klaseApp')
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    
-    // $scope.changeTo = 'Hungarian';
-    /* event source that pulls from google.com */
-    // $scope.eventSource = {
-    //         url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-    //         className: 'gcal-event',           // an option!
-    //         currentTimezone: 'America/Chicago' // an option!
-    // };
-    /* event source that contains custom events on the scope */
-    $scope.events = [
-      // {title: 'All Day Event',start: new Date(y, m, 1)},
-      // {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      // {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      // {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      // {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      // {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
-    ];
-    // /* event source that calls a function on every view switch */
-    // $scope.eventsF = function (start, end, timezone, callback) {
-    //   var s = new Date(start).getTime() / 1000;
-    //   var e = new Date(end).getTime() / 1000;
-    //   var m = new Date(start).getMonth();
-    //   var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-    //   callback(events);
-    // };
 
-    // $scope.calEventsExt = {
-    //    color: '#f00',
-    //    textColor: 'yellow',
-    //    events: [ 
-    //       {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-    //       {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-    //       {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29)}
-    //     ]
-    // };
-    // /* alert on eventClick */
-    // $scope.alertOnEventClick = function( date, jsEvent, view){
-    //     $scope.alertMessage = (date.title + ' was clicked ');
-    // };
-    // /* alert on Drop */
-    //  $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-    //    $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
-    // };
-    // /* alert on Resize */
-    // $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-    //    $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
-    // };
+    /* event source that contains custom events on the scope */
+    $scope.events = [];
+    
     /* add and removes an event source of choice */
     $scope.addRemoveEventSource = function(sources,source) {
       var canAdd = 0;
@@ -91,13 +48,12 @@ angular.module('klaseApp')
     };
     /* add custom event*/
     $scope.addEvent = function() {
-
       var dialog = ngDialog.open({
        template: '<form name="newEventForm">'+
-            '<input type="text" placeholder="title" ng-model="newEvent.title" ng-required="true"/><br>'+
+            '<input type="text" class="form-control" placeholder="title" ng-model="newEvent.title" ng-required="true"/><br>'+
             '<textarea ng-model="newEvent.message" name="message" class="form-control" rows="3" placeholder="Type event message here" ng-required="true"></textarea><br>'+
-            '<input type="datetime-local" class="form-control" ng-model="newEvent.schedule" placeholder="due date" ng-required="true">'+
-            '<input type="datetime-local" class="form-control" ng-model="newEvent.deadline" placeholder="due date" ng-required="true">'+
+            'Start: <input type="datetime-local" class="form-control" ng-model="newEvent.schedule" placeholder="due date (yyyy-MM-dd)" ng-required="true">'+
+            'End: <input type="datetime-local" class="form-control" ng-model="newEvent.deadline" placeholder="due date (yyyy-MM-dd)" ng-required="true">'+
             '<select class="form-control" ng-model="newEvent.sectionId" ng-options="s.courseNumber+\' \'+s.sectionName for s in accessibleSections track by s.id" name="sectionId" >'+
                 '<option value="">-- select section --</option>'+
             '</select><br>'+
@@ -107,18 +63,12 @@ angular.module('klaseApp')
        className: 'ngdialog-theme-default',
        controller: 'EventCtrl'
       });
-        // $scope.events.push({
-        //   title: 'result.title',
-        //   start: new Date(),
-        //   // end: new Date(y, m, d + 1),
-        //   // className: ['openSesame']
-        // });
-        
     };
+
     $scope.refresh = function () {
       $scope.events.push({
           title: 'result.title',
-          start: new Date(y-1, m, d),
+          start: new Date(y-1, m, d)
           // end: new Date(y, m, d + 1),
           // className: ['openSesame']
         });
@@ -128,11 +78,11 @@ angular.module('klaseApp')
       $scope.events.splice(index,1);
     };
     /* Change View */
-    $scope.changeView = function(view,calendar) {console.log('changeView');
+    $scope.changeView = function(view,calendar) {
       uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
     };
     /* Change View */
-    $scope.renderCalender = function(calendar) {console.log('render');
+    $scope.renderCalender = function(calendar) {
       if(uiCalendarConfig.calendars[calendar]){
         uiCalendarConfig.calendars[calendar].fullCalendar('render');
       }
@@ -143,34 +93,57 @@ angular.module('klaseApp')
                      'tooltip-append-to-body': true});
         $compile(element)($scope);
     };
+
+     /* alert on Drop */
+     $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
+       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+    };
+    /* alert on Resize */
+    $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
+       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+    };
+
+    /* alert on eventClick */
+    $scope.alertOnEventClick = function( date, jsEvent, view){
+      var schedule = new Date(date.schedule);
+      var deadline = new Date(date.deadline);
+        var dialog = ngDialog.open({
+         template:
+              '<input type="text" class="form-control" value="'+date.title+'" ng-readonly="true"/><br>'+
+              '<textarea class="form-control" rows="3" ng-readonly="true">'+date.message+'</textarea><br>'+
+              '<input type="text" class="form-control" value="'+schedule+'" ng-readonly="true">'+
+              '<input type="text" class="form-control" value="'+deadline+'" ng-readonly="true">'+
+              '<input type="text" class="form-control" value="'+date.section.courseNumber + ' ' + date.section.sectionName+'" ng-readonly="true"/><br>',
+           plain: true, 
+         className: 'ngdialog-theme-default',
+         controller: 'EventCtrl'
+        });
+    };
     /* config object */
     $scope.uiConfig = {
       calendar:{
-        height: 450,
+        height: 420,
         editable: true,
         header:{
           left: 'title',
           center: '',
           right: ''
         },
-        // eventClick: $scope.alertOnEventClick,
-        // eventDrop: $scope.alertOnDrop,
-        // eventResize: $scope.alertOnResize,
-        // eventRender: $scope.eventRender
+        eventClick: $scope.alertOnEventClick,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize,
+        eventRender: $scope.eventRender
       }
     };
 
-    // $scope.changeLang = function() {
-    //   if($scope.changeTo === 'Hungarian'){
-    //     $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-    //     $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-    //     $scope.changeTo= 'English';
-    //   } else {
-    //     $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    //     $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    //     $scope.changeTo = 'Hungarian';
-    //   }
-    // };
+    /* Change View */
+    $scope.renderCalender = function (calendar) {
+        if (uiCalendarConfig.calendars[calendar]) {
+            // console.log('.', uiCalendarConfig.calendars[calendar]);
+            uiCalendarConfig.calendars[calendar].fullCalendar('render');
+        }
+    };
+    
     /* event sources array*/
     $scope.eventSources = [$scope.events];
     // $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
@@ -189,8 +162,8 @@ angular.module('klaseApp')
         return;
       })
       .catch(function onError(sailsResponse){
-      toastr.error('Error '+sailsResponse.status, 'Error');
-      return;
+        toastr.error('Error '+sailsResponse.status, 'Error');
+        return;
       });
     };
     
@@ -201,6 +174,20 @@ angular.module('klaseApp')
      * events
      * **************************************************************/
     $scope.addEventProcess = function () {
+      if (!$scope.newEventForm.$valid) {
+        return;
+      }
+
+      if ($scope.newEvent.schedule < new Date()) {
+        toastr.info('Cannot select past dates for start date','Invalid date');
+        return;
+      }
+
+      if ($scope.newEvent.deadline < new Date()) {
+        toastr.info('Cannot select past dates for end date','Invalid date');
+        return;
+      }
+
       console.log('POST /createevent');
       $http.post('/createevent', {
         title: $scope.newEvent.title,
@@ -216,7 +203,7 @@ angular.module('klaseApp')
           start: result.schedule,
           end: result.deadline
         });
-        
+        toastr.error('Success '+sailsResponse.status, 'Success');
         return;
       })
       .catch(function onError(sailsResponse){
@@ -229,9 +216,9 @@ angular.module('klaseApp')
      * Fetch events
      * **************************************************************/
     var getEvents = function () {
-      console.log('GET /event');
-      $http.get('/event', {
-        
+      console.log('PUT /event');
+      $http.put('/event', {
+        userId: $scope.loggedInUserId
       })
       .then(function onSuccess(sailsResponse){
         for (var i = 0; i < sailsResponse.data.length; i++) {
@@ -240,7 +227,7 @@ angular.module('klaseApp')
           sailsResponse.data[i].className = ['openSesame'];
           $scope.events.push(sailsResponse.data[i])
         };
-        $scope.renderCalender('myCalendar1');
+        $scope.renderCalender('calendar');
         // $scope.eventsList = sailsResponse.data;
         return;
       })
@@ -259,11 +246,17 @@ angular.module('klaseApp')
     $scope.$on('showEvent',function(e, event){
       $scope.showEvent = true;
       $scope.selectedEvent = event;
-      console.log($scope.selectedEvent);
+      // console.log($scope.selectedEvent);
     });
 
     $scope.$on('showCalendar',function(e){
       $scope.showEvent = false;
+      
+      $timeout(function () {
+          $scope.refresh();
+          window.fireEvent('resize');
+          $scope.renderCalender('calendar');
+      }, 500);
     });
 
     $scope.$on('hideEvent',function(e){

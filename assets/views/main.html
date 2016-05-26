@@ -1,7 +1,7 @@
 
 <klase-header ng-show="loggedIn"></klase-header>
 
-<klase-sidepanel ng-show="loggedIn"></klase-sidepanel>
+<klase-sidepanel ng-show="loggedIn && !showCalendar"></klase-sidepanel>
  
 <klase-feed ng-show="loggedIn && isSet(1)"></klase-feed> 
  
@@ -13,6 +13,6 @@
 
 <klase-class ng-show="loggedIn && showClass && !(isSet(1) || isSet(2) || isSet(3) || isSet(4))"></klase-class>
 
-<klase-calendar ng-show="loggedIn && isSet(6)"></klase-calendar>
+<klase-calendar ng-show="loggedIn" ></klase-calendar>
 
 <!--<klase-login ng-hide="loggedIn"></klase-login>-->
