@@ -16,6 +16,7 @@ angular.module('klaseApp')
     $scope.showClass = false;
     $scope.showProfile = false;
     $scope.showCalendar = false;
+    $scope.showAssignment = false;
     $scope.origin = window.location.origin;
     $scope.role = $cookies.get('role');
     $scope.isConnected = false;
@@ -151,6 +152,7 @@ angular.module('klaseApp')
       .then(function onSuccess (sailsResponse){
         // Refresh the page now that we've been logged in.
         $cookies.put('firstname', sailsResponse.data.fName);
+        $cookies.put('lastname', sailsResponse.data.lName);
         $cookies.put('fullname', sailsResponse.data.fName + ' ' + sailsResponse.data.mName + ' ' + sailsResponse.data.lName);
         $cookies.put('role', sailsResponse.data.role);
         $cookies.put('id', sailsResponse.data.id);
@@ -194,6 +196,7 @@ angular.module('klaseApp')
       .then(function onSuccess (){
         // Refresh the page now that we've been logged out.
         $cookies.remove('firstname');
+        $cookies.remove('lastname');
         $cookies.remove('fullname');
         $cookies.remove('role');
         $cookies.remove('id');
@@ -225,6 +228,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('showClass', section);
       $scope.$broadcast('hideEvent');
     });
@@ -237,7 +241,20 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = false;
       $scope.showEvent = true;
+      $scope.showAssignment = false;
       $scope.$broadcast('showEvent', event);
+    });
+
+    /* **************************************************************
+     * show assignment event
+     * **************************************************************/
+    $scope.$on('requestShowAssignment', function(e, assignment){
+      $scope.showCalendar = false;
+      $scope.showProfile = false;
+      $scope.showClass = false;
+      $scope.showEvent = false;
+      $scope.showAssignment = true;
+      $scope.$broadcast('showAssignment', assignment);
     });
 
     /* **************************************************************
@@ -248,6 +265,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = false;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('showCalendar');
       $scope.$broadcast('hideEvent');
     });
@@ -260,6 +278,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('classActivities', section);
       $scope.$broadcast('hideEvent');
     });
@@ -272,6 +291,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('classPosts', section);
       $scope.$broadcast('hideEvent');
     });
@@ -284,6 +304,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('classGrades', section);
       $scope.$broadcast('hideEvent');
     });
@@ -296,6 +317,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.$broadcast('getClassMembers', section);
       $scope.$broadcast('hideEvent');
     });
@@ -308,6 +330,7 @@ angular.module('klaseApp')
       $scope.showProfile = true;
       $scope.showClass = false;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       // $scope.setTab(99);
       $scope.$broadcast('showProfile', poster);
       $scope.$broadcast('hideEvent');
@@ -321,6 +344,7 @@ angular.module('klaseApp')
       $scope.showProfile = false;
       $scope.showClass = true;
       $scope.showEvent = false;
+      $scope.showAssignment = false;
       $scope.setTab(index);
     });
     

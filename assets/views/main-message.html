@@ -15,7 +15,7 @@
           <img class="small-avatar" ng-src="images/yeoman.png" />
           <b>{{ thread.participant1.id == loggedInUserId ? thread.participant2.fName + ' ' + thread.participant2.lName : thread.participant1.fName + ' ' + thread.participant1.lName }}</b>
           <br/>
-          {{ thread.lastActivity | date: 'EEE MMM d, yyyy h:mm a' }}
+          <div class="smalldate">{{ thread.lastActivity | date: 'EEE MMM d, yyyy h:mm a' }}</div>
         </div>
       </a>
       
@@ -29,7 +29,7 @@
           <tr class="chat_message" ng-repeat="chat in chatList | orderBy: 'postDate' : false | limitTo: 15">
               <td class="col-md-12 td_class">
                 <strong>{{ chat.sender.fName + ' ' + chat.sender.lName }}</strong>
-                {{ chat.postDate | date: 'M/d/y h:mm a' }} <strong>:</strong>
+                <div class="smalldate">{{ chat.postDate | date: 'M/d/y h:mm a' }}</div>
                 <br/>
                 {{ chat.message }}
               </td>

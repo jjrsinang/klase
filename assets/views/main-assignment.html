@@ -1,0 +1,20 @@
+
+<div ng-controller="ClassActivitiesCtrl as assignmentCtrl" class="profile-container" ng-show="showAssignment && !showCalendar">
+    <div class="post img-rounded">
+        <span><h4>{{ assignmentSelected.title }}</h4></span>
+        <span><b>{{ assignmentSelected.message }}</b></span>
+        <br />
+        Credit: {{ assignmentSelected.mark }}
+        <br />
+        <br />
+        <span>Posted: {{ assignmentSelected.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span> <br>
+        <span>Due: {{ assignmentSelected.dueDate | date: 'EEE MMM d, yyyy h:mm a'  }}</span>
+        <br />
+        <a href="{{ origin + '/images/' + assignmentSelected.filename }}" target="_blank" class="btn btn-primary btn-sm" ng-hide="assignmentSelected.filename.length == 0 || assignmentSelected.filename == null">
+            <span class="glyphicon glyphicon-file"></span>{{ assignmentSelected.file }}
+        </a>
+        <br>
+        <br>
+        <a href ng-click="onClickSubmitAssignment(assignmentSelected.id)">Submit assignment...</a>
+    </div>
+</div>

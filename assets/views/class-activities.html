@@ -26,14 +26,11 @@
 
     <!-- assignments in feed -->
     <div ng-repeat="assignment in assignments | orderBy: 'postDate' : true" class="post img-rounded">
-        <img class="small-avatar" ng-src="images/yeoman.png" />
-        <span class="poster-name" ><a href>{{ assignment.poster.fName + " " + assignment.poster.lName }}</a></span>
+        
         <a href="" style="color: red; float: right;" ng-click="deleteAssignment(assignment.id)" ng-show="loggedInUserId == assignment.poster.id">Delete</a>
         <br />
-        <span class="post-timestamp" >{{ assignment.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
-        <br />
-        <br />
         <h5>{{ assignment.title }}</h5>
+        <span class="post-timestamp smalldate" >Posted at {{ assignment.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
         <h5>Due: {{ assignment.dueDate | date: 'EEE MMM d, yyyy h:mm a' }}</h5>
         <p>{{ assignment.message }}</p>
         <a href="{{ origin + '/images/' + assignment.filename }}" target="_blank" class="btn btn-primary" ng-hide="{{ assignment.filename.length == 0 || assignment.filename == null }}">

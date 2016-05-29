@@ -51,7 +51,7 @@
         <span class="post-to" ng-click="displaySelectedSection(post.section)"><a href>{{ post.section.courseNumber + " " + post.section.sectionName }}</a></span>
         <a href="" class="delete" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId == post.poster.id || loggedInUserRole == 'Teacher'">Delete</a>
         <br />
-        <span class="post-timestamp" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
+        <span class="post-timestamp smalldate" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
         <br />
         <br />
         <p>{{ post.message }}</p>

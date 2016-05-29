@@ -417,6 +417,15 @@
         });
      };
 
+     $scope.$on('showAssignment',function(e, assignment){
+      $scope.assignmentSelected = assignment;
+      // console.log($scope.selectedEvent);
+    });
+
+     $scope.datediff = function(first, second) {
+      return new Date(first)-new Date(second);
+     }
+
 
     }]);
 })();

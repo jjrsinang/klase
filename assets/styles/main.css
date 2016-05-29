@@ -169,6 +169,15 @@ body {
   position: fixed;
   font-size: 16px;
 }
+#sidebar2-wrapper {
+  font-size: 16px;
+  width: 250px; 
+  float: right;
+  margin-top: 10px;
+  background-color: #F8F8F8;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
 
 .classes,
 .events {
@@ -222,13 +231,20 @@ body {
 .post {
   padding: 10px;
   margin: 10px;
-  width: 400px;
+  width: 480px;
   background-color: #F8F8F8;
-}/* feed */
+}
+
+.post .delete { display: none; }
+.post:hover .delete { display: inline; }
+.member .delete { display: none; }
+.member:hover .delete { display: inline; }
+/* feed */
 
 /* message */
 .inbox {
   float: left;
+  width: 270px;
   padding: 10px;
   margin-top: 10px;
   margin-left: 10px;
@@ -244,7 +260,7 @@ body {
   text-decoration: none;
   color: #777;
   height: 60px;
-  width: 200px;
+  width: 230px;
 }
 
 .inbox a:hover {
@@ -253,6 +269,7 @@ body {
 
 .contact {
   margin: 10px;
+  width: 230px;
 }
 
 .messages {
@@ -280,4 +297,8 @@ body {
   background-color: #F8F8F8;
   height: 90px;
   width: 480px;
+}
+
+.smalldate {
+  font-size:0.85em;
 }

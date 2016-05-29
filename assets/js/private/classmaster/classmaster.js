@@ -9,11 +9,12 @@
  * Controller of the klaseApp
  */
 angular.module('klaseApp')
-  .controller('ClassmasterCtrl', ['$scope', '$http', 'toastr', 'ngDialog', function ($scope, $http, toastr, ngDialog) {
+  .controller('ClassmasterCtrl', ['$scope', '$http', 'toastr', 'ngDialog', '$cookies', function ($scope, $http, toastr, ngDialog, $cookies) {
     $scope.allSections = [];
     $scope.saveTeacherLoading = false;
     $scope.availableTeachers = [];
-    
+    $scope.role = $cookies.get('role');
+
     var getSections = function () {
       console.log('GET /allsections');
 	  $http.get('/allsections', {
@@ -46,8 +47,11 @@ angular.module('klaseApp')
     	});
     };
     
-    getSections();
-    getAvailableTeachers();
+    if ($scope.role == 'Admin') {
+    	$scope.setTab(4);
+    	getSections();
+    	getAvailableTeachers();
+    }
 
     /* **************************************************************
 	 * add student

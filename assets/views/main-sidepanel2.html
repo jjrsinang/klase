@@ -1,0 +1,25 @@
+<div id="sidebar2-wrapper" ng-controller="Sidepanel2Ctrl as assignmentpanel">
+   
+   <!-- assignments -->
+   <div class="classes">
+      <ul class="sidebar-nav">
+        
+        <li>
+            Pending Assignments
+        </li>
+        
+        <li ng-repeat="assignment in assignments" >
+            <a href ng-click="setTab($index + 90); displaySelectedAssignment($index)">{{ assignment.title }}
+              <div ng-show="assignment.isLate" style="color: red; float: right;">Late</div>
+              <br>
+              <span class="smalldate">due {{ assignment.dueDate | date: 'EEE MMM d, yyyy h:mm a' }}</span></a>
+              <br>
+        </li>
+
+        <li ng-show="assignments.length == 0">
+          <span style="color: gray;">no pending assignments</span>
+        </li>
+
+    </ul>
+   </div>
+</div>

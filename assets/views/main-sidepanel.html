@@ -30,10 +30,11 @@
          </li>
 
          <li ng-show="upcomingEvents.length == 0">
-          no events to show
-          </li>
+          <span style="color: gray;">no events to show</span>
+         </li>
 
          <li>
+            <br>
             <a href ng-click="setTab( {{ upcomingEvents.length + sections.length + 6 }} ); displayCalendar()" >
               <span class="glyphicon glyphicon-calendar"></span> Show Calendar
             </a>

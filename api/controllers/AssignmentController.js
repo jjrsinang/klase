@@ -8,22 +8,60 @@
 module.exports = {
     
     /**********************************************************/
-    getEventsByUser: function (req, res) {
-        Event
+    getPendingAssignmentsForUser: function (req, res) {
+        UserSection
         .find()
         .where({
-            sectionId: req.param('sectionId')
+            userId: req.param('userId')
         })
-        .populateAll()
-        .exec(function foundSections(err, events) {
+        .exec(function foundSections(err, usersections) {
             if (err) return res.negotiate(err);
-            if (!events) return res.notFound();
+            if (!usersections) return res.notFound();
+            //sails.log.debug(usersections);
             
-            sails.log.info('getEventsByUser: ');
-            sails.log.debug(events);
+            var sectionIds = new Array();
+            for (i = 0; i < usersections.length; i++) {
+                sectionIds.push(usersections[i].sectionId);
+            }
+            //sails.log.debug(sectionIds);
             
-            return res.ok(events);
-        }); 
+            Assignment
+            .find()
+            .where({
+                sectionId: sectionIds
+            })
+            .exec(function foundAssignments(err2, assignments) {
+                if (err2) return res.negotiate(err2);
+                if (!assignments) return res.ok();
+                
+                var assignmentIds = new Array();
+                for (i = 0; i < assignments.length; i++) {
+                    assignmentIds.push(assignments[i].id);
+                }
+
+                AssignmentSubmission
+                .find()
+                .where({
+                    assignmentId: assignmentIds,
+                    studentId: req.param('userId')
+                })
+                .exec(function foundSubmissions(err3, submissions){
+
+                    var pending = [];
+                    for (var j = 0; j < assignments.length; j++) {
+                        var hasSubmission = false;
+                        for (var i = 0; i < submissions.length; i++) {
+                            if (submissions[i].assignmentId == assignments[j].id) {
+                                hasSubmission = true;
+                            }
+                        };
+                        if (!hasSubmission) pending.push(assignments[j]);
+                    };
+
+                    return res.ok(pending);
+                });
+            }); 
+        });
     },
 
     /**********************************************************/
@@ -308,6 +346,7 @@ module.exports = {
         });
     },
 
+    /**********************************************************/
     gradeSubmission: function (req, res) {
         sails.log.info('gradeSubmission: ' +req.param('id'));
         AssignmentSubmission

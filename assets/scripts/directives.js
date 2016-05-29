@@ -23,6 +23,13 @@
         templateUrl: 'views/main-sidepanel.html'
       };
     });
+
+    app.directive('klasePendingAssignmentSidepanel', function() {
+      return {
+        restrict: 'E',
+        templateUrl: 'views/main-sidepanel2.html'
+      };
+    });
     
     app.directive('klaseFeed', function() {
       return {
@@ -63,6 +70,13 @@
       return {
         restrict: 'E',
         templateUrl: 'views/main-calendar.html'
+      };
+    });
+
+    app.directive('klaseAssignment', function() {
+      return {
+        restrict: 'E',
+        templateUrl: 'views/main-assignment.html'
       };
     });
     

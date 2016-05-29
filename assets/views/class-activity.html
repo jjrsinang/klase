@@ -15,6 +15,7 @@
     </div>
 
     <div ng-repeat="submission in assignmentSubmissions | orderBy: 'postDate' : true" class="post img-rounded">
+        <div ng-show="datediff(submission.postDate,activitySelected.dueDate) < 0" style="color: red; float: right;">Submitted late</div>
         <span class="poster-name" ><a href>{{ submission.student.fName + ' ' + submission.student.lName }}</a></span><br>
         <span class="post-timestamp" >{{ submission.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span><br>
         <h5>{{ submission.title }}</h5>

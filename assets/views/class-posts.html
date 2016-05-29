@@ -19,7 +19,7 @@
         <span class="poster-name" ng-click="displayProfile(post.poster)"><a href>{{ post.poster.fName + " " + post.poster.lName }}</a></span>
         <a href="" class="delete" style="color: red; float: right;" ng-click="deletePost(post.id)" ng-show="loggedInUserId==post.poster.id || loggedInUserRole == 'Teacher'">Delete</a>
         <br />
-        <span class="post-timestamp" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
+        <span class="post-timestamp smalldate" >{{ post.postDate | date: 'EEE MMM d, yyyy h:mm a' }}</span>
         <br />
         <br />
         <p>{{ post.message }}</p>
